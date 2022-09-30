@@ -51,6 +51,9 @@ public:		//メンバ関数
 	// 旗取得
 	static CGoal *GetGoal() { return m_pGoal; }
 
+	// Round数の取得
+	static int GetRoundNum() { return m_nRoundNum; }
+
 	// プレイヤーのスコアをランキングに設定
 	static void SetPlayerScore();
 

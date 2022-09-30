@@ -149,14 +149,14 @@ void CGame::SetPlayerScore()
 	if (m_pPlayer != nullptr)
 	{
 		// プレイヤースコアの初期化
-		CRank::SetScore(0);
+		CRank::AddScore(0);
 
 		CScore* pScore = m_pPlayer->GetScore();
 
 		if (pScore != nullptr)
 		{
 			int nSocre = pScore->GetScore();
-			CRank::SetScore(nSocre);
+			CRank::AddScore(nSocre);
 		}
 	}
 }

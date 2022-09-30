@@ -46,7 +46,7 @@ public:
 	void Draw() override;
 
 	// プレイヤーのスコア設定
-	static void SetScore(int nScore) { m_nScorePlayer = nScore; }
+	static void AddScore(int nScore) { m_nScorePlayer += nScore; }
 
 private:
 	static LPDIRECT3DTEXTURE9 m_apTexture[TYPE_MAX];	//テクスチャのポインタ

@@ -18,6 +18,7 @@
 #include "gauge.h"
 #include "score.h"
 #include "logo.h"
+#include "rank.h"
 //*****************************************************************************
 // 定数宣言
 //*****************************************************************************
@@ -206,7 +207,7 @@ void CBall::Update()
 			{
 				// ボス接近中のロゴ
 				CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 300.0f, 0.0f), D3DXVECTOR2(300.0f, 90.0f),
-					CLogo::TYPE_SCOREUI, CLogo::ANIM_NONE, 1000);
+					CLogo::TYPE_SCOREUI, CLogo::ANIM_NONE, 180);
 
 				int nScore = (int)(goalPos.x - pos.x);
 				if (nScore < 0)
@@ -217,6 +218,9 @@ void CBall::Update()
 				// スコアの生成
 				CScore::Create(D3DXVECTOR3(530.0f, 150.0f, 0.0f),
 					D3DXVECTOR2(70.0f, 90.0f), 50)->Add(nScore);
+
+				// スコアの加算
+				CRank::AddScore(nScore);
 			}
 
 			m_nCntRestart++;
@@ -224,8 +228,23 @@ void CBall::Update()
 
 		if (m_nCntRestart == 180)
 		{
-			// モードの設定
-			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_GAME);
+			if (CGame::GetRoundNum() == 3)
+			{
+				// ボス接近中のロゴ
+				CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 300.0f, 0.0f), D3DXVECTOR2(300.0f, 90.0f),
+					CLogo::TYPE_FINISH, CLogo::ANIM_HORIZONTALLY, 180);
+
+				if (m_nCntRestart == 360)
+				{
+					// モードの設定
+					CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_RESULT);
+				}
+			}
+			else
+			{
+				// モードの設定
+				CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_GAME);
+			}
 		}
 	}
 
