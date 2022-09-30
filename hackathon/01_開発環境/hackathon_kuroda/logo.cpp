@@ -127,7 +127,7 @@ HRESULT CLogo::Load()
 //-----------------------------------------------------------------------------------------------
 void CLogo::Unload()
 {
-	for (int nCnt = 0; nCnt >= ANIM_MAX; nCnt++)
+	for (int nCnt = 0; nCnt >= TYPE_MAX; nCnt++)
 	{
 		// テクスチャの破棄
 		if (m_pTexture[nCnt] != nullptr)
