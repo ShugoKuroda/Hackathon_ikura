@@ -15,6 +15,8 @@
 #include "player.h"
 #include "ball.h"
 #include "gauge.h"
+#include "score.h"
+#include "logo.h"
 //*****************************************************************************
 // 定数宣言
 //*****************************************************************************
@@ -29,7 +31,7 @@ LPDIRECT3DTEXTURE9 CBall::m_apTexture = { nullptr };
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CBall::CBall() : m_move(0.0f, 0.0f, 0.0f)
+CBall::CBall() : m_move(0.0f, 0.0f, 0.0f), m_bFall(false)
 {
 	//オブジェクトの種類設定
 	SetObjType(EObject::OBJ_PLAYER);
@@ -154,14 +156,66 @@ void CBall::Update()
 		m_bEnterPower = true;
 	}
 
+	// ゴールポールの位置取得
+	D3DXVECTOR3 goalPos = CGame::GetGoal()->GetObject(2)->GetPosition();
+
+	// 落下中ではない場合
+	if (m_bFall == false)
+	{
+		// ボールの速度が一定以下
+		if (m_fBallSpeed <= 15.0f)
+		{
+			// ゴールポール穴の範囲内なら
+			if (pos.x <= goalPos.x + 35.0f && pos.x >= goalPos.x - 35.0f)
+			{
+				// 落下フラグを立てる
+				m_bFall = true;
+			}
+		}
+	}
+	else if (m_bFall == true)
+	{
+		// 重力を掛ける
+		m_move.y += 1.5f;
+		pos += m_move;
+
+		// 色の取得
+		D3DXCOLOR col = GetColor();
+		col.a -= 0.1f;
+		SetColor(col);
+	}
+
+	if (m_bFall == true)
+	{
+		// ボス接近中のロゴ
+		CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 300.0f, 0.0f), D3DXVECTOR2(300.0f, 90.0f),
+			CLogo::TYPE_SCOREUI, CLogo::ANIM_NONE, 1000);
+
+		// スコアの生成
+		CScore::Create(D3DXVECTOR3(530.0f, 150.0f, 0.0f),
+			D3DXVECTOR2(70.0f, 90.0f), 50)->Add(0);
+	}
+	else if (m_fBallSpeed <= 0.0f)
+	{
+		// ボス接近中のロゴ
+		CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 300.0f, 0.0f), D3DXVECTOR2(300.0f, 90.0f),
+			CLogo::TYPE_SCOREUI, CLogo::ANIM_NONE, 1000);
+
+		//int nScore= goalPos
+
+		// スコアの生成
+		CScore::Create(D3DXVECTOR3(530.0f, 150.0f, 0.0f),
+			D3DXVECTOR2(70.0f, 90.0f), 50)->Add(0);
+	}
+
 	if (!(ifScroll()))
 	{
-		SetPosition(D3DXVECTOR3(GetPosition().x + m_fBallSpeed, GetPosition().y, 0.0f));
+		SetPosition(D3DXVECTOR3(GetPosition().x + m_fBallSpeed, pos.y, 0.0f));
 	}
 
 	else
 	{
-		SetPosition(D3DXVECTOR3(GetPosition().x, GetPosition().y, 0.0f));
+		SetPosition(D3DXVECTOR3(GetPosition().x, pos.y, 0.0f));
 	}
 
 	// 回転率の更新

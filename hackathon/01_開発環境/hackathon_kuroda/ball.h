@@ -57,6 +57,7 @@ private:	//メンバ変数
 	bool m_bSwing;			// ふったか
 	float m_fGaugePower;	// ゲージのどこらへんで止めたか
 	float m_fBallSpeed;		// ゲージから持ってきたやつ
+	bool m_bFall;
 };
 
 #endif //_BALL_H_
