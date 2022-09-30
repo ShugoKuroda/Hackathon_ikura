@@ -65,7 +65,7 @@ HRESULT CGame::Init()
 	m_pPlayer = CPlayer::Create(D3DXVECTOR3(300.0f, CRenderer::SCREEN_HEIGHT / 2, 0.0f), 0);
 
 	// îwåiê∂ê¨
-	m_pBall = CBall::Create(D3DXVECTOR3(300.0f, CRenderer::SCREEN_HEIGHT / 2, 0.0f), 0);
+	m_pBall = CBall::Create(D3DXVECTOR3(300.0f, 550.0f, 0.0f), 0);
 
 	// îwåiê∂ê¨
 	m_pBg = CBg::Create();
