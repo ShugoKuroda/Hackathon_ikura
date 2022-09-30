@@ -19,8 +19,8 @@
 //-----------------------------------------------------------------------------
 // É}ÉNÉçíËã`
 //-----------------------------------------------------------------------------
-#define SCORE_POS				(D3DXVECTOR3(470.0f,150.0f,0.0f))
-#define PLAYER_SCORE_POS		(D3DXVECTOR3(500.0f,CRenderer::SCREEN_HEIGHT - 50.0f,0.0f))
+#define SCORE_POS				(D3DXVECTOR3(530.0f,150.0f,0.0f))
+#define PLAYER_SCORE_POS		(D3DXVECTOR3(540.0f,CRenderer::SCREEN_HEIGHT - 50.0f,0.0f))
 #define SCORE_SIZE				(D3DXVECTOR2(70.0f,90.0f))
 #define PLAYER_SCORE_SIZE		(D3DXVECTOR2(50.0f,60.0f))
 #define SCORE_SPACE				(50)
