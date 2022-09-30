@@ -170,7 +170,7 @@ void CRenderer::Draw()
 
 #ifdef _DEBUG
 		// FPSï\é¶
-		DrawFPS();
+		//DrawFPS();
 #endif // _DEBUG
 
 		//ï`âÊèIóπ

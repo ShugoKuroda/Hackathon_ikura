@@ -19,7 +19,7 @@
 #include "fade_scene.h"
 #include "library.h"
 #include "rank.h"
-
+#include "game.h"
 //-----------------------------------------------------------------------------------------------
 // usingéŒ¾
 //-----------------------------------------------------------------------------------------------
@@ -186,8 +186,8 @@ void CTitle::Update()
 
 			// ƒ‚[ƒh‚ÌÝ’è
 			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_GAME);
-
-			CSound::Play(CSound::SOUND_LABEL_SE_CUPIN);
+			CGame::SetRoundNum(0);
+;			CSound::Play(CSound::SOUND_LABEL_SE_CUPIN);
 
 
 		}

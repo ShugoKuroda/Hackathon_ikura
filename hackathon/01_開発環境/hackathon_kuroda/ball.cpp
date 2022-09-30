@@ -263,11 +263,11 @@ void CBall::Update()
 				// ボス接近中のロゴ
 				CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 300.0f, 0.0f), D3DXVECTOR2(300.0f, 90.0f),
 					CLogo::TYPE_FINISH, CLogo::ANIM_HORIZONTALLY, 180);
+				// モードの設定
+				CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_RESULT);
 
 				if (m_nCntRestart == 360)
 				{
-					// モードの設定
-					CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_RESULT);
 				}
 			}
 			else

@@ -54,6 +54,7 @@ public:		//メンバ関数
 	// Round数の取得
 	static int GetRoundNum() { return m_nRoundNum; }
 
+	static void SetRoundNum(int nNum) { m_nRoundNum = nNum; }
 	// プレイヤーのスコアをランキングに設定
 	static void SetPlayerScore();
 
