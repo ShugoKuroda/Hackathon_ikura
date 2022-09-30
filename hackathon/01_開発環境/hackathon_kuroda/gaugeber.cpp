@@ -154,10 +154,10 @@ void CGaugeber::Draw()
 void CGaugeber::SetScalePos(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 {
 
-	VERTEX_2D *pVtx;
+	/*VERTEX_2D *pVtx;
 
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-	//バッファの生成
+	バッファの生成
 	pVtx[0].pos = D3DXVECTOR3(pos.x, pos.y - scale.y, 0.0f);
 	pVtx[1].pos = D3DXVECTOR3(pos.x + scale.x, pos.y - scale.y, 0.0f);
 	pVtx[2].pos = D3DXVECTOR3(pos.x, pos.y + scale.y, 0.0f);
@@ -168,7 +168,7 @@ void CGaugeber::SetScalePos(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 	pVtx[2].tex = D3DXVECTOR2(0.0, 1.0);
 	pVtx[3].tex = D3DXVECTOR2((1.0f / m_fMaxGauge)*scale.x, 1.0);
 
-	m_pVtxBuff->Unlock();
+	m_pVtxBuff->Unlock();*/
 
 }
 //--------------------------------------------------------------------
