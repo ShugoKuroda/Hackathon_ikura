@@ -7,6 +7,7 @@
 #include "renderer.h"
 #include "gauge.h"
 #include "fade.h"
+#include "gaugeber.h"
 //#include "Polygon.h"
 //#include "gaugeber.h"
 
@@ -22,10 +23,11 @@ CGauge::~CGauge()
 }
 
 CGauge *CGauge::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale,
-	const float& MaxGaugeWidth, const int& nMaxValue)
+	const int& nMaxValue)
 {
 	CGauge *pGauge = NULL;
 	pGauge = new CGauge();
+	pGauge->m_pGaugeBer = CGaugeber::Create(pos, scale, nMaxValue);
 	//ƒQ[ƒW‚Ì˜g‚Ì¶¬
 	//if (!pGauge->m_pFrame)
 	//{

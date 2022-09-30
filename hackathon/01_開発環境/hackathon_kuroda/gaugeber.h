@@ -32,8 +32,8 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
-	void SetGauge(float Set);//ゲージの増減
-	void SetScalePos(D3DXVECTOR3 pos, D3DXVECTOR3 scale, int AddType);
+	void SetGauge(float AddValue);//ゲージの増減
+	void SetScalePos(D3DXVECTOR3 pos, D3DXVECTOR3 scale);
 	float GetGaugeValue() { return m_fValue; }
 
 	// 移動量
@@ -43,7 +43,6 @@ private:
 	static LPDIRECT3DTEXTURE9 m_apTexture;	//テクスチャのポインタ
 	CObject2D *m_apGaugeBer;			//2Dポリゴンへのポインタ
 											//頂点バッファへのポインター
-	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;
 
 	static float m_fMoveQuantity;	// 画面の総移動量
 	D3DXVECTOR3 m_pos;//位置

@@ -9,17 +9,14 @@
 #include "input_joypad.h"
 #include "sound.h"
 #include "renderer.h"
-
 #include "library.h"
-
 #include "bg.h"
 #include "bullet.h"
 #include "player.h"
 #include "explosion.h"
 #include "score.h"
-
 #include "rank.h"
-
+#include "gauge.h"
 //-----------------------------------------------------------------------------
 // マクロ定義
 //-----------------------------------------------------------------------------
@@ -27,15 +24,12 @@
 #define LIFE_UI_SIZE		(D3DXVECTOR2(120.0f, 30.0f))
 #define LEVEL_UI_SIZE		(D3DXVECTOR2(50.0f, 50.0f))
 #define ATTACK_INTERVAL		(7)
-
 #define MAX_SWING_ROT		(D3DX_PI/2)
 #define MAX_CHARGE_ROT		(-D3DX_PI/2)
-
 //-----------------------------------------------------------------------------
 // using宣言
 //-----------------------------------------------------------------------------
 using namespace LibrarySpace;
-
 //*****************************************************************************
 // 定数宣言
 //*****************************************************************************
@@ -57,6 +51,7 @@ CPlayer::CPlayer() :
 {
 	//オブジェクトの種類設定
 	SetObjType(EObject::OBJ_PLAYER);
+	m_pGauge = nullptr;
 }
 
 //-----------------------------------------------------------------------------
@@ -183,6 +178,12 @@ void CPlayer::Update()
 		//	//サウンド再生
 		//	CSound::Play(CSound::SOUND_LABEL_SE_SHOT);
 		//}
+		//ゲージを表示させる
+		//ヌルチェック
+		if (!m_pGauge)
+		{
+			m_pGauge = CGauge::Create({ 1280.0f / 2,720.0f / 2,0.0f }, { 200.0f,50.0f,0.0f }, 10.0f);
+		}
 	}
 	else if (m_bSwing == true)
 	{

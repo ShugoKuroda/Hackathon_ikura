@@ -185,7 +185,7 @@ void CTitle::Update()
 			m_bPush = true;
 
 			// ƒ‚[ƒh‚ÌÝ’è
-			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_RESULT);
+			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_GAME);
 		}
 	}
 

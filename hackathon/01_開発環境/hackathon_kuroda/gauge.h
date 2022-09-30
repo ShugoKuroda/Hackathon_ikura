@@ -8,7 +8,7 @@
 #include "object.h"
 
 class CPolygon;
-class CGaugeBer;
+class CGaugeber;
 
 class CGauge : public CObject
 {
@@ -16,8 +16,7 @@ public:
 
 	CGauge();
 	~CGauge();
-	static CGauge*Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale,
-		const float& MaxGaugeWidth, const int& nMaxValue);
+	static CGauge*Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale,const int& nMaxValue);
 	static HRESULT Load();		// テクスチャの読み込み
 	static void Unload();		// テクスチャの削除
 
@@ -30,7 +29,7 @@ public:
 	float GetGaugeValue() { return m_fValue; }
 private:
 	CPolygon *m_pFrame;//ゲージの枠
-	CGaugeBer *m_pGaugeBer;
+	CGaugeber *m_pGaugeBer;
 	float m_fValue;//ゲージの値
 };
 
