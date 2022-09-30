@@ -28,8 +28,10 @@ using namespace LibrarySpace;
 //-----------------------------------------------------------------------------------------------
 // テクスチャのポインタ
 LPDIRECT3DTEXTURE9 CGoal::m_apTexture[OBJ_MAX] = { nullptr };
-const float CGoal::SIZE_X = 100.0f;
-const float CGoal::SIZE_Y = 500.0f;
+//const float CGoal::SIZE_X = 100.0f;
+//const float CGoal::SIZE_Y = 500.0f;
+const int CGoal::RAND_POS_X_MIN = 100;
+const int CGoal::RAND_POS_X_MAX = 500;
 
 //-----------------------------------------------------------------------------------------------
 // コンストラクタ
@@ -116,14 +118,17 @@ HRESULT CGoal::Init()
 		m_apObject2D[nCnt] = new CObject2D;
 	}
 
+	// ランダム生成位置の取得
+	int nRandPosX = LibrarySpace::GetRandNum(RAND_POS_X_MAX, RAND_POS_X_MIN);
+
 	// 旗のポール
-	m_apObject2D[FLAG_POLE]->SetPosition(D3DXVECTOR3((ScreenSize.x / 2) + 50.0f, (ScreenSize.y / 2) - 20.0f, 0.0f));
+	m_apObject2D[FLAG_POLE]->SetPosition(D3DXVECTOR3(45.0f + nRandPosX, (ScreenSize.y / 2) - 40.0f, 0.0f));
 	m_apObject2D[FLAG_POLE]->SetSize(D3DXVECTOR2(100.0f, 500.0f));
 	// ゴール穴上部
-	m_apObject2D[FLAG_HOLE_UP]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y - 170.0f, 0.0f));
+	m_apObject2D[FLAG_HOLE_UP]->SetPosition(D3DXVECTOR3(nRandPosX, ScreenSize.y - 170.0f, 0.0f));
 	m_apObject2D[FLAG_HOLE_UP]->SetSize(D3DXVECTOR2(70.0f, 50.0f));
 	// ゴール穴下部
-	m_apObject2D[FLAG_HOLE_DOWN]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y - 170.0f, 0.0f));
+	m_apObject2D[FLAG_HOLE_DOWN]->SetPosition(D3DXVECTOR3(nRandPosX, ScreenSize.y - 170.0f, 0.0f));
 	m_apObject2D[FLAG_HOLE_DOWN]->SetSize(D3DXVECTOR2(70.0f, 50.0f));
 
 	for (int nCnt = 0; nCnt < OBJ_MAX; nCnt++)
@@ -132,6 +137,8 @@ HRESULT CGoal::Init()
 		m_apObject2D[nCnt]->BindTexture(m_apTexture[nCnt]);
 	}
 
+	//穴の下部を次に描画する
+	m_apObject2D[FLAG_POLE]->SetObjType(CObject::OBJ_GOAL_POLE);
 	//穴の下部を次に描画する
 	m_apObject2D[FLAG_HOLE_DOWN]->SetObjType(CObject::OBJ_GOAL_HOLE);
 
