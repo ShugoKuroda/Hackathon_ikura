@@ -190,12 +190,20 @@ void CBall::Update()
 		{
 			if (m_nCntRestart == 0)
 			{
-				// ƒ{ƒXÚ‹ß’†‚ÌƒƒS
-				CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 300.0f, 0.0f), D3DXVECTOR2(300.0f, 90.0f),
+				// ¡‚Ì‹L˜^ƒƒS
+				CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 180.0f, 0.0f), D3DXVECTOR2(300.0f, 90.0f),
 					CLogo::TYPE_SCOREUI, CLogo::ANIM_NONE, 1000);
 
+				// ‚ƒƒS
+				CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 180.0f, 0.0f), D3DXVECTOR2(300.0f, 90.0f),
+					CLogo::TYPE_M, CLogo::ANIM_NONE, 1000);
+
+				// ‚ƒƒS
+				CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 180.0f, 0.0f), D3DXVECTOR2(300.0f, 90.0f),
+					CLogo::TYPE_M, CLogo::ANIM_NONE, 1000);
+
 				// ƒXƒRƒA‚Ì¶¬
-				CScore::Create(D3DXVECTOR3(530.0f, 150.0f, 0.0f),
+				CScore::Create(D3DXVECTOR3(530.0f, 360.0f, 0.0f),
 					D3DXVECTOR2(70.0f, 90.0f), 50)->Add(0);
 			}
 
