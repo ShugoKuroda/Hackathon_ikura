@@ -27,6 +27,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gauge.cpp" />
     <ClCompile Include="gaugeber.cpp" />
+    <ClCompile Include="goal_flag.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="input_joypad.cpp" />
     <ClCompile Include="input_keyboard.cpp" />
@@ -57,6 +58,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="gauge.h" />
     <ClInclude Include="gaugeber.h" />
+    <ClInclude Include="goal_flag.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="input_joypad.h" />
     <ClInclude Include="input_keyboard.h" />

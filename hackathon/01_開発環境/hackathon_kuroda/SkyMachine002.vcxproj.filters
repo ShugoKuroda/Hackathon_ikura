@@ -86,6 +86,7 @@
       <Filter>NewFilter1\ゲージ</Filter>
     </ClCompile>
     <ClCompile Include="bg.cpp" />
+    <ClCompile Include="goal_flag.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gauge.h">
@@ -173,6 +174,7 @@
       <Filter>NewFilter1\ゲージ</Filter>
     </ClInclude>
     <ClInclude Include="bg.h" />
+    <ClInclude Include="goal_flag.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NewFilter1">
