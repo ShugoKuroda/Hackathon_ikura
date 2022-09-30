@@ -126,9 +126,6 @@ HRESULT CPlayer::Init()
 	// ‰Šú‰»
 	CObject2D::Init();
 
-	// ‘€ì‰Â”\ó‘Ô‚É‚·‚é
-	m_bControl = true;
-
 	return S_OK;
 }
 

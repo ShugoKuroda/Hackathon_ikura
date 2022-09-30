@@ -113,6 +113,12 @@ void CGame::Update()
 		// STARTロゴ
 		CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 300.0f, 0.0f), D3DXVECTOR2(300.0f, 90.0f),
 			CLogo::TYPE_START, CLogo::ANIM_NONE, 120);
+
+		// プレイヤーを操作可能状態にする
+		if (m_pPlayer != nullptr)
+		{
+			m_pPlayer->SetControl(true);
+		}
 	}
 	else if (m_nCounterLogo >= 121)
 	{
