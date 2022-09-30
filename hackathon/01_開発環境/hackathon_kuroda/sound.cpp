@@ -26,7 +26,10 @@ CSound::SOUNDPARAM CSound::m_aParam[CSound::SOUND_LABEL_MAX] =
 	{ "data/BGM/game000.wav", -1 },			// ÉQÅ[ÉÄBGM
 	{ "data/BGM/result000.wav", -1 },		// ÉäÉUÉãÉgBGM
 	{ "data/SE/button.wav", 0 },			// é©ã@ìoèÍ
-	{ "data/SE/shot000.wav", 0 },			// íeî≠éÀ
+	{ "data/SE/puttershot.wav", 0 },			// íeî≠éÀ
+	{ "data/SE/let_go000.wav", 0 },			// é©ã@ìoèÍ
+	{ "data/SE/cup_in000.wav", 0 },			// íeî≠éÀ
+
 };
 
 //=============================================================================

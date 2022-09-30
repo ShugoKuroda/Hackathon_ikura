@@ -90,6 +90,8 @@ private:	//ƒƒ“ƒo•Ï”
 	bool m_bControl;
 	//ƒNƒ‰ƒu‚ğU‚è‚©‚Ô‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©
 	bool m_bSwing;
+	//‰¹‚ğˆê‰ñ‚¾‚¯–Â‚ç‚·
+	bool m_bPlayLetSe;
 };
 
 #endif //_PLAYER_H_
