@@ -28,6 +28,9 @@
 #define LEVEL_UI_SIZE		(D3DXVECTOR2(50.0f, 50.0f))
 #define ATTACK_INTERVAL		(7)
 
+#define MAX_SWING_ROT		(-D3DX_PI/2)
+#define MAX_CHARGE_ROT		(D3DX_PI/2)
+
 //-----------------------------------------------------------------------------
 // using宣言
 //-----------------------------------------------------------------------------
@@ -126,6 +129,7 @@ HRESULT CPlayer::Init()
 	// 初期化
 	CObject2D::Init();
 
+	// 操作可能状態にする
 	m_bControl = true;
 
 	return S_OK;
@@ -151,7 +155,7 @@ void CPlayer::Update()
 	CInputKeyboard *pKeyboard = CManager::GetInputKeyboard();
 
 	// 位置情報を取得
-	float rot = CObject2D::GetRot();
+	float fRot = CObject2D::GetRot();
 
 	// 
 	if (pKeyboard->GetPress(CInputKeyboard::KEYINFO_ATTACK) == true && m_bControl == true)
@@ -160,29 +164,39 @@ void CPlayer::Update()
 		// 振りかぶっている状態にする
 		m_bSwing = true;
 
-		rot += 0.01f;
+	 	// 回転率の増加
+		fRot += 0.01f;
 
-		//攻撃カウンターの加算
-		m_nCntAttack++;
-
-		if (m_nCntAttack > ATTACK_INTERVAL)
+		if (fRot >= MAX_CHARGE_ROT)
 		{
-			//攻撃カウンターをリセット
-			m_nCntAttack = 0;
-
-			//サウンド再生
-			CSound::Play(CSound::SOUND_LABEL_SE_SHOT);
+			m_bControl = false;
 		}
+
+		////攻撃カウンターの加算
+		//m_nCntAttack++;
+
+		//if (m_nCntAttack > ATTACK_INTERVAL)
+		//{
+		//	//攻撃カウンターをリセット
+		//	m_nCntAttack = 0;
+
+		//	//サウンド再生
+		//	CSound::Play(CSound::SOUND_LABEL_SE_SHOT);
+		//}
 	}
-	if (m_bSwing == true)
+	else if (m_bSwing == true)
 	{
-		// 振りかぶっている状態にする
-		m_bSwing = true;
 		m_bControl = false;
+
+		if (fRot > MAX_SWING_ROT)
+		{
+			// 回転率の増加
+			fRot -= 0.1f;
+		}
 	}
 
 	// 回転率の更新
-	SetRot(rot);
+	SetRot(fRot);
 
 	//位置情報更新
 	CObject2D::SetPosition(pos);
