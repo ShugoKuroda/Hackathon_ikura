@@ -101,12 +101,11 @@ CGaugeber *CGaugeber::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale, c
 //-----------------------------------------------------------------------------------------------
 HRESULT CGaugeber::Init()
 {
-	//スクリーンサイズの保存
-	D3DXVECTOR2 ScreenSize = D3DXVECTOR2((float)CRenderer::SCREEN_WIDTH, (float)CRenderer::SCREEN_HEIGHT);
-
 	m_apGaugeBer = new CObject2D;
 	//オブジェクトの種類設定
-	m_apGaugeBer->SetObjType(EObject::OBJ_BG);
+	m_apGaugeBer->SetObjType(EObject::OBJ_EFFECT);
+	m_apGaugeBer->SetPosition(m_pos);
+	m_apGaugeBer->SetSize({ m_scale .x,m_scale .y});
 
 	//m_apGaugeBer->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y / 2, 0.0f));
 	//m_apGaugeBer->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
@@ -138,7 +137,8 @@ void CGaugeber::Uninit()
 //-----------------------------------------------------------------------------------------------
 void CGaugeber::Update()
 {
-
+	//位置と大きさをリアルタイムで更新
+	SetScalePos(m_pos, m_scale);
 }
 
 //-----------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ void CGaugeber::Draw()
 //--------------------------------------------------------------------
 //スケールのpos＋側だけ増やすため
 //--------------------------------------------------------------------
-void CGaugeber::SetScalePos(D3DXVECTOR3 pos, D3DXVECTOR3 scale, int AddType)
+void CGaugeber::SetScalePos(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 {
 
 	VERTEX_2D *pVtx;
@@ -170,4 +170,19 @@ void CGaugeber::SetScalePos(D3DXVECTOR3 pos, D3DXVECTOR3 scale, int AddType)
 
 	m_pVtxBuff->Unlock();
 
+}
+//--------------------------------------------------------------------
+//ゲージの増減処理
+//--------------------------------------------------------------------
+void CGaugeber::SetGauge(float AddValue)
+{
+	m_fValue -= AddValue;
+	float fAdd = (m_fMaxGauge * AddValue) / m_fValueMax;
+	m_scale.x -= fAdd;
+
+	if (m_fValue >= m_fValueMax)
+	{
+		m_fValue = m_fValueMax;
+		m_scale.x = m_fMaxGauge;
+	}
 }
