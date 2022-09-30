@@ -47,6 +47,7 @@ private:
 	int m_nCntLoop;		// タイトル演出をループさせるまでの時間
 	bool m_bPush;
 	bool m_bDrawPress;	// ボタン押下の催促ロゴを描画するかどうか
+	bool m_bPressFade;	// PRESS ENTERを点滅させるかどうか
 	D3DXVECTOR3 m_move;		// 移動量
 };
 

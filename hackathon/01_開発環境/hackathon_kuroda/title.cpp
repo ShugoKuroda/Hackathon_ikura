@@ -33,7 +33,7 @@ LPDIRECT3DTEXTURE9 CTitle::m_apTexture[OBJ_MAX] = { nullptr };
 //-----------------------------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------------------------
-CTitle::CTitle() :m_nCntLoop(0), m_bPush(false), m_move(0.0f, 0.0f, 0.0f), m_bDrawPress(false)
+CTitle::CTitle() :m_nCntLoop(0), m_bPush(false), m_move(0.0f, 0.0f, 0.0f), m_bDrawPress(false), m_bPressFade(false)
 {
 	for (int nCnt = 0; nCnt < OBJ_MAX; nCnt++)
 	{
@@ -163,15 +163,18 @@ void CTitle::Update()
 	if (pos.y <= CRenderer::SCREEN_HEIGHT / 2)
 	{
 		pos.y += 5.0f;
+	}
+	else
+	{
 		m_bDrawPress = true;
 	}
 
-	if (pKeyboard->GetPress(CInputKeyboard::KEYINFO_ATTACK) == true)
+	if (pKeyboard->GetTrigger(CInputKeyboard::KEYINFO_ATTACK) == true)
 	{//攻撃キー押下
 		if (m_bDrawPress == false)
 		{
 			pos.y = CRenderer::SCREEN_HEIGHT / 2;
-			m_bDrawPress == true;
+			m_bDrawPress = true;
 		}
 		else if (m_bPush == false && m_bDrawPress == true)
 		{
@@ -179,7 +182,40 @@ void CTitle::Update()
 
 			// モードの設定
 			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_GAME);
+
+
 		}
+	}
+
+	if (m_bDrawPress == true)
+	{
+		// 色の取得
+		D3DXCOLOR col = m_apObject2D[LOGO_PUSH]->GetColor();
+
+		// PRESSロゴを点滅させる
+		if (m_bPressFade == false)
+		{
+			// a値を加算
+			col.a += 0.02f;
+			// a値の加算が終わったら
+			if (col.a >= 1.0f)
+			{// a値の減算を始める
+				m_bPressFade = true;
+			}
+		}
+		else if (m_bPressFade == true)
+		{
+			// a値を減算
+			col.a -= 0.02f;
+			// a値の減算が終わったら
+			if (col.a <= 0.0f)
+			{// a値の加算を始める
+				m_bPressFade = false;
+			}
+		}
+
+		// PRESSロゴの色を設定
+		m_apObject2D[LOGO_PUSH]->SetColor(col);
 	}
 
 	// 画面遷移中はリセットしない
