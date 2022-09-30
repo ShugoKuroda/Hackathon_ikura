@@ -33,7 +33,7 @@ LPDIRECT3DTEXTURE9 CBall::m_apTexture = { nullptr };
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CBall::CBall() : m_move(0.0f, 0.0f, 0.0f), m_bFall(false), m_nCntRestart(0)
+CBall::CBall() : m_move(0.0f, 0.0f, 0.0f), m_bFall(false), m_nCntRestart(0), m_bPlayShop(false), m_bPlayCupIn(false)
 {
 	//オブジェクトの種類設定
 	SetObjType(EObject::OBJ_PLAYER);
@@ -139,6 +139,13 @@ void CBall::Update()
 
 	if (m_bSwing && CGame::GetPlayer()->GetRot() >= 0.0f)
 	{
+		if (!m_bPlayShop)
+		{
+			CSound::Play(CSound::SOUND_LABEL_SE_SHOT);
+
+			m_bPlayShop = true;
+		}
+
 		if (m_bEnterPower)
 		{
 			m_fBallSpeed -= 0.02;
@@ -164,7 +171,7 @@ void CBall::Update()
 		if (m_bFall == false)
 		{
 			// ボールの速度が一定以下
-			if (m_fBallSpeed <= 4.0f)
+			if (m_fBallSpeed <= 15.0f)
 			{
 				// ゴールポール穴の範囲内なら
 				if (pos.x <= goalPos.x + 35.0f && pos.x >= goalPos.x - 35.0f)
@@ -205,6 +212,13 @@ void CBall::Update()
 				// スコアの生成
 				CScore::Create(D3DXVECTOR3(530.0f, 360.0f, 0.0f),
 					D3DXVECTOR2(70.0f, 90.0f), 50)->Add(0);
+
+				if (!m_bPlayCupIn)
+				{
+					CSound::Play(CSound::SOUND_LABEL_SE_CUPIN);
+
+					m_bPlayCupIn = true;
+				}
 			}
 
 			m_nCntRestart++;

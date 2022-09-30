@@ -182,6 +182,10 @@ void CTitle::Update()
 
 			// ƒ‚[ƒh‚ÌÝ’è
 			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_GAME);
+
+			CSound::Play(CSound::SOUND_LABEL_SE_CUPIN);
+
+
 		}
 	}
 
