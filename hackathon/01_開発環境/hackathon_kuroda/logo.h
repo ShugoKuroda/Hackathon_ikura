@@ -29,6 +29,7 @@ public:
 		TYPE_M,				// ｍ(メートル)のロゴ
 		TYPE_FINISH,		// 終了ロゴ
 		TYPE_NOKORI,		// 残りロゴ
+		TYPE_TUTORIAL,		// チュートリアルロゴ
 		TYPE_MAX
 	};
 

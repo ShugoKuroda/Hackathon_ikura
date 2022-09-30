@@ -115,6 +115,9 @@ HRESULT CLogo::Load()
 	D3DXCreateTextureFromFile(pDevice,
 		"data/TEXTURE/nokori000.png",
 		&m_pTexture[TYPE_NOKORI]);
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/tatehuda000.png",
+		&m_pTexture[TYPE_TUTORIAL]);
 
 	return S_OK;
 }
@@ -178,15 +181,6 @@ void CLogo::Update()
 	// 表示カウンターが0以下
 	if (m_nCountUninit <= 0)
 	{// 破棄
-		if (m_type == TYPE_FINISH)
-		{
-			// モードの設定
-			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_RESULT);
-
-			// プレイヤーのスコアをランキングに設定
-			CGame::SetPlayerScore();
-		}
-
 		// 破棄
 		Uninit();
 		return;
