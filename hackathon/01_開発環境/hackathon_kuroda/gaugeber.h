@@ -34,7 +34,7 @@ public:
 	void Draw() override;
 	void SetGauge(const float& AddValue);//ƒQ[ƒW‚Ì‘Œ¸
 	float GetGaugeValue() { return m_fValue; }
-
+	void SetCol(D3DXCOLOR col);
 	// ˆÚ“®—Ê
 
 private:

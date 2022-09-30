@@ -86,6 +86,9 @@
       <Filter>NewFilter1\ゲージ</Filter>
     </ClCompile>
     <ClCompile Include="bg.cpp" />
+    <ClCompile Include="gaugeframe.cpp">
+      <Filter>NewFilter1\ゲージ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gauge.h">
@@ -173,6 +176,9 @@
       <Filter>NewFilter1\ゲージ</Filter>
     </ClInclude>
     <ClInclude Include="bg.h" />
+    <ClInclude Include="gaugeframe.h">
+      <Filter>NewFilter1\ゲージ</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NewFilter1">

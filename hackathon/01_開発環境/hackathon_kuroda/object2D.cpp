@@ -159,7 +159,7 @@ void CObject2D::Draw()
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 }
 
-void CObject2D::SetGaugePos(const D3DXVECTOR3 & pos, const D3DXVECTOR3 & scale)
+void CObject2D::SetGaugePos(const D3DXVECTOR3 & pos, const D3DXVECTOR3 & scale, const float& MaxGauge)
 {
 
 	VERTEX_2D *pVtx;
@@ -170,6 +170,10 @@ void CObject2D::SetGaugePos(const D3DXVECTOR3 & pos, const D3DXVECTOR3 & scale)
 	pVtx[1].pos = D3DXVECTOR3(pos.x + scale.x, pos.y - scale.y, 0.0f);
 	pVtx[2].pos = D3DXVECTOR3(pos.x, pos.y + scale.y, 0.0f);
 	pVtx[3].pos = D3DXVECTOR3(pos.x + scale.x, pos.y + scale.y, 0.0f);
+	pVtx[0].tex = D3DXVECTOR2(0.0, 0.0);
+	pVtx[1].tex = D3DXVECTOR2((1.0f / MaxGauge)*scale.x, 0.0);
+	pVtx[2].tex = D3DXVECTOR2(0.0, 1.0);
+	pVtx[3].tex = D3DXVECTOR2((1.0f / MaxGauge)*scale.x, 1.0);
 
 	m_pVtxBuff->Unlock();
 

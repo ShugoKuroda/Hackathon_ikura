@@ -40,7 +40,7 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 	void SetPosition(const D3DXVECTOR3& pos) { m_pos = pos; }
-	void SetGaugePos(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale);
+	void SetGaugePos(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale,const float& MaxGauge);
 	void SetSize(D3DXVECTOR2 size);
 	void SetRot(float fRot) { m_fRot = fRot; }
 	void SetMove(const D3DXVECTOR3& move){ m_move = move; }

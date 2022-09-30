@@ -141,7 +141,7 @@ void CGaugeber::Update()
 {
 	if (m_apGaugeBer)
 	{
-		m_apGaugeBer->SetGaugePos(m_pos, m_scale);
+		m_apGaugeBer->SetGaugePos(m_pos, m_scale, m_fMaxGauge);
 	}
 }
 
@@ -167,5 +167,13 @@ void CGaugeber::SetGauge(const float& AddValue)
 	{
 		m_fValue = m_fValueMax;
 		m_scale.x = m_fMaxGauge;
+	}
+}
+
+void CGaugeber::SetCol(D3DXCOLOR col)
+{
+	if (m_apGaugeBer)
+	{
+		m_apGaugeBer->SetColor(col);
 	}
 }

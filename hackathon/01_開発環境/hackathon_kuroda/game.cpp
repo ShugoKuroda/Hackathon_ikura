@@ -21,7 +21,7 @@
 #include "pause.h"
 #include "rank.h"
 #include "score.h"
-
+#include "gaugeber.h"
 #include "explosion.h"
 
 //-----------------------------------------------------------------------------------------------
@@ -151,6 +151,7 @@ void CGame::LoadAll()
 	CLogo::Load();
 	// ポーズ画面
 	CPause::Load();
+	CGaugeber::Load();
 }
 
 //-----------------------------------------------------------------------------------------------
@@ -170,4 +171,6 @@ void CGame::UnloadAll()
 	CLogo::Unload();
 	// ポーズ画面
 	CPause::Unload();
+	CGaugeber::Unload();
+
 }

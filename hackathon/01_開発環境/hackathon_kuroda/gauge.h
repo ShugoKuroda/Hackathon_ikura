@@ -9,6 +9,7 @@
 
 class CPolygon;
 class CGaugeber;
+class CGaugeFrame;
 
 class CGauge : public CObject
 {
@@ -28,7 +29,7 @@ public:
 	void SetEndGauge();
 	float GetGaugeValue();
 private:
-	CPolygon *m_pFrame;//ÉQÅ[ÉWÇÃòg
+	CGaugeFrame *m_pFrame;//ÉQÅ[ÉWÇÃòg
 	CGaugeber *m_pGaugeBer;
 	float m_fValue;//ÉQÅ[ÉWÇÃíl
 };
