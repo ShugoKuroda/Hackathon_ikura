@@ -23,7 +23,7 @@ public:
 	enum SkyType
 	{//”wŒi‚Ìí—Ş
 		SKYBG_SKY = 0,		// ‹ó
-		SKYBG_CLOUD,		// ’n–Ê
+		SKYBG_CLOUD,		// kumo
 		SKYBG_MAX			// ”wŒi‚ÌÅ‘å”
 	};
 
