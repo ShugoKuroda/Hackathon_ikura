@@ -55,7 +55,7 @@ HRESULT CGaugeFrame::Load()
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
 	// テクスチャの読み込み
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/gaugeFrame000.png", &m_apTexture);			// 空
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/gaugeFrame001.png", &m_apTexture);			// 空
 	return S_OK;
 }
 
@@ -107,7 +107,7 @@ HRESULT CGaugeFrame::Init()
 	m_apGaugeFrame->SetObjType(EObject::OBJ_EFFECT);
 
 	m_apGaugeFrame->SetPosition(m_pos);
-	m_apGaugeFrame->SetSize(D3DXVECTOR2(m_scale.x*1.05f, m_scale.y*2.3f));
+	m_apGaugeFrame->SetSize(D3DXVECTOR2(m_scale.x*1.02f, m_scale.y*2.3f));
 
 	m_apGaugeFrame->Init();
 	m_apGaugeFrame->BindTexture(m_apTexture);
