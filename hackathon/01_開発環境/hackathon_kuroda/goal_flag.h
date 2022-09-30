@@ -20,10 +20,14 @@ class CObject2D;
 class CGoal : public CObject
 {
 private:		// 定数
-	// サイズ(X)
-	static const float SIZE_X;
-	// サイズ(Y)
-	static const float SIZE_Y;
+	//// サイズ(X)
+	//static const float SIZE_X;
+	//// サイズ(Y)
+	//static const float SIZE_Y;
+	// 旗のランダム生成位置(X軸)の最小値
+	static const int RAND_POS_X_MIN;
+	// 旗のランダム生成位置(X軸)の最大値
+	static const int RAND_POS_X_MAX;
 
 public:
 	enum FLAG_OBJ

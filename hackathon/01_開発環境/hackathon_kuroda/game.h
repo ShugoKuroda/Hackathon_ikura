@@ -48,6 +48,9 @@ public:		//メンバ関数
 	// たま取得
 	static CBall *GetBall() { return m_pBall; }
 
+	// 旗取得
+	static CGoal *GetGoal() { return m_pGoal; }
+
 	// プレイヤーのスコアをランキングに設定
 	static void SetPlayerScore();
 
