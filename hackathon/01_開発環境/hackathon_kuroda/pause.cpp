@@ -202,9 +202,6 @@ void CPause::Update()
 			D3DXVECTOR3 pos = m_apObject2D[m_nPauseSelect]->GetPosition();
 			// 選択カーソルの位置設定
 			m_apObject2D[TYPE_SELECTOR]->SetPosition(D3DXVECTOR3(pos.x - 380.0f, pos.y, pos.z));
-
-			// 効果音
-			CSound::Play(CSound::SOUND_LABEL_SE_MENU_SELECT);
 		}
 		else if (pKeyboard->GetTrigger(CInputKeyboard::KEYINFO_DOWN) || pJoypad->GetTrigger(CInputJoypad::JOYKEY_DOWN, m_nNumPlayer))
 		{
@@ -224,9 +221,6 @@ void CPause::Update()
 			D3DXVECTOR3 pos = m_apObject2D[m_nPauseSelect]->GetPosition();
 			// 選択カーソルの位置設定
 			m_apObject2D[TYPE_SELECTOR]->SetPosition(D3DXVECTOR3(pos.x - 380.0f, pos.y, pos.z));
-
-			// 効果音
-			CSound::Play(CSound::SOUND_LABEL_SE_MENU_SELECT);
 		}
 
 		// 現在選択されている項目は色を黄色に設定
@@ -291,15 +285,6 @@ void CPause::Draw(void)
 void CPause::SetPause()
 {
 	m_bPause = m_bPause ? false : true;
-
-	if (m_bPause == true)
-	{
-		CSound::Play(CSound::SOUND_LABEL_SE_MENU_IN);
-	}
-	else if (m_bPause == false)
-	{
-		CSound::Play(CSound::SOUND_LABEL_SE_MENU_OUT);
-	}
 
 	CManager::SetPause(m_bPause);
 }
