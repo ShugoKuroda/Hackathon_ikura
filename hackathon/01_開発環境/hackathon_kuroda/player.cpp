@@ -36,7 +36,7 @@ using namespace LibrarySpace;
 const float CPlayer::SIZE_X = 200.0f;
 const float CPlayer::SIZE_Y = 600.0f;
 const float CPlayer::MOVE_DEFAULT = 10.0f;
-
+const D3DXVECTOR3 GaugePos = { 300.0f,500.0f,0.0f };
 //*****************************************************************************
 // 静的メンバ変数宣言
 //*****************************************************************************
@@ -162,10 +162,7 @@ void CPlayer::Update()
 	 	// 回転率の増加
 		fRot -= 0.01f;
 
-		if (fRot < MAX_CHARGE_ROT)
-		{
-			m_bControl = false;
-		}
+
 
 		////攻撃カウンターの加算
 		//m_nCntAttack++;
@@ -182,7 +179,17 @@ void CPlayer::Update()
 		//ヌルチェック
 		if (!m_pGauge)
 		{
-			m_pGauge = CGauge::Create({ 1280.0f / 2,720.0f / 2,0.0f }, { 200.0f,50.0f,0.0f }, 10.0f);
+			m_pGauge = CGauge::Create(GaugePos, { 500.0f,50.0f,0.0f }, MAX_SWING_ROT);
+		}
+		if (m_pGauge)
+		{
+			//ゲージを増やす
+			m_pGauge->SetAddGauge(0.01f);
+		}
+
+		if (fRot < MAX_CHARGE_ROT)
+		{
+			m_bControl = false;
 		}
 	}
 	else if (m_bSwing == true)

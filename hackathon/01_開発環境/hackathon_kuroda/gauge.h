@@ -16,7 +16,7 @@ public:
 
 	CGauge();
 	~CGauge();
-	static CGauge*Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale,const int& nMaxValue);
+	static CGauge*Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale,const float& fMaxValue);
 	static HRESULT Load();		// テクスチャの読み込み
 	static void Unload();		// テクスチャの削除
 
@@ -24,7 +24,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	void SetAddGauge(float Set, int nGaugeType);//ゲージの増減
+	void SetAddGauge(float AddValue);//ゲージの増減
 	void SetEndGauge();
 	float GetGaugeValue() { return m_fValue; }
 private:

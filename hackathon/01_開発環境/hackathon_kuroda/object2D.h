@@ -40,6 +40,7 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 	void SetPosition(const D3DXVECTOR3& pos) { m_pos = pos; }
+	void SetGaugePos(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale);
 	void SetSize(D3DXVECTOR2 size);
 	void SetRot(float fRot) { m_fRot = fRot; }
 	void SetMove(const D3DXVECTOR3& move){ m_move = move; }
@@ -67,8 +68,6 @@ public:
 	const D3DXCOLOR& GetColor() const { return m_col; }
 
 private:	//メンバ変数
-	//頂点バッファへのポインター
-	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;
 	//テクスチャへのポインター
 	LPDIRECT3DTEXTURE9 m_pTexture;
 	//位置
@@ -90,6 +89,10 @@ private:	//メンバ変数
 
 	// 移動量(画面シェイク用)
 	D3DXVECTOR3 m_move;
+protected:
+	//頂点バッファへのポインター
+	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;
+
 };
 
 #endif // _OBJECT_2D_

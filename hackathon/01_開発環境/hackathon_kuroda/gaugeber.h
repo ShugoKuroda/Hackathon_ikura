@@ -27,13 +27,12 @@ public:
 	static HRESULT Load(void);		//テクスチャの読み込み
 	static void Unload(void);		//テクスチャの削除
 	static CGaugeber *Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale,
-			const int& nMaxValue);			//インスタンス生成処理
+			const float& fMaxValue);			//インスタンス生成処理
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
-	void SetGauge(float AddValue);//ゲージの増減
-	void SetScalePos(D3DXVECTOR3 pos, D3DXVECTOR3 scale);
+	void SetGauge(const float& AddValue);//ゲージの増減
 	float GetGaugeValue() { return m_fValue; }
 
 	// 移動量
