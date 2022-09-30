@@ -7,7 +7,7 @@
 #ifndef _BALL_H_
 #define _BALL_H_
 
-#define SCROLLBALLPOS (CRenderer::SCREEN_WIDTH / 2.5f)
+#define SCROLLBALLPOS (CRenderer::SCREEN_WIDTH / 3.0f)
 #define SCROLLFLAGPOS (CRenderer::SCREEN_WIDTH - (CRenderer::SCREEN_WIDTH / 4.0f))
 
 #include "object2D.h"
@@ -43,15 +43,7 @@ public:
 
 	float GetSpeed() { return m_fBallSpeed; }
 
-	bool ifScroll()
-	{
-		if (GetPosition().x > SCROLLBALLPOS)
-		{
-			return true;
-		}
-
-		return false;
-	}
+	bool ifScroll();
 
 private:	//メンバ変数
 			// テクスチャのポインタ

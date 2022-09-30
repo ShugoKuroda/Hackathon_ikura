@@ -210,8 +210,15 @@ void CPlayer::Update()
 	// 回転率の更新
 	SetRot(fRot);
 
+	float m_fMoveQuantity = 0;
+
+	if (CGame::GetBall()->ifScroll())
+	{
+		m_fMoveQuantity = CGame::GetBall()->GetSpeed();	// 玉の移動速度
+	}
+
 	//位置情報更新
-	CObject2D::SetPosition(D3DXVECTOR3(GetPosition().x - CGame::GetBg()->GetMoveQuantity(), GetPosition().y, 0.0f));
+	CObject2D::SetPosition(D3DXVECTOR3(GetPosition().x - m_fMoveQuantity, GetPosition().y, 0.0f));
 
 	//状態管理
 	State();

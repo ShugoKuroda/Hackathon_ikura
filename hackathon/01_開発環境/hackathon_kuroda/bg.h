@@ -42,11 +42,6 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	// 移動量
-	static void ZeroMoveQuantity() { m_fMoveQuantity = 0.0f; }
-	static void MoveQuantity(float move) { m_fMoveQuantity += move; }
-	static float GetMoveQuantity() { return m_fMoveQuantity; }
-
 private:
 	//メンバ変数
 	static const int m_nGround = 3;
@@ -56,8 +51,6 @@ private:
 
 	static CObject2D *m_apSkyObject2D[SKYBG_MAX];	//2Dポリゴンへのポインタ
 	static CObject2D *m_apGroundObject2D[m_nGround];	//2Dポリゴンへのポインタ
-
-	static float m_fMoveQuantity;	// 画面の総移動量
 };
 
 #endif		// _BG_H_

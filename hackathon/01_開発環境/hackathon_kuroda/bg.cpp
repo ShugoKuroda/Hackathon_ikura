@@ -33,8 +33,6 @@ LPDIRECT3DTEXTURE9 CBg::m_apGroundTexture[m_nGround] = {};
 CObject2D *CBg::m_apSkyObject2D[SKYBG_MAX] = {};
 CObject2D *CBg::m_apGroundObject2D[m_nGround] = {};
 
-float CBg::m_fMoveQuantity = 0;
-
 //-----------------------------------------------------------------------------------------------
 //	コンストラクタ
 //-----------------------------------------------------------------------------------------------
@@ -125,8 +123,6 @@ HRESULT CBg::Init()
 	//=============================================================================
 	//スクリーンサイズの保存
 	D3DXVECTOR2 ScreenSize = D3DXVECTOR2((float)CRenderer::SCREEN_WIDTH, (float)CRenderer::SCREEN_HEIGHT);
-	// 移動量リセット
-	m_fMoveQuantity = 0;
 
 	for (int nCnt = 0; nCnt < SKYBG_MAX; nCnt++)
 	{// 生成
@@ -197,6 +193,8 @@ void CBg::Uninit()
 //-----------------------------------------------------------------------------------------------
 void CBg::Update()
 {
+	float m_fMoveQuantity = 0;
+
 	D3DXVECTOR2 ScreenSize = D3DXVECTOR2((float)CRenderer::SCREEN_WIDTH, (float)CRenderer::SCREEN_HEIGHT);
 
 	if (CGame::GetBall()->ifScroll())
@@ -211,9 +209,8 @@ void CBg::Update()
 	CInputKeyboard *pKeyboard = CManager::GetInputKeyboard();
 
 	//=============================================================================
-	// →が押された
+	// 移動
 	//=============================================================================
-
 	for (int nCnt = 0; nCnt < m_nGround; nCnt++)
 	{
 		// 地面の位置情報更新

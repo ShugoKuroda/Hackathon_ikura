@@ -10,6 +10,7 @@
 #include "sound.h"
 #include "renderer.h"
 
+#include "goal_flag.h"
 #include "game.h"
 #include "player.h"
 #include "ball.h"
@@ -177,4 +178,15 @@ void CBall::Draw()
 {
 	//•`‰æ
 	CObject2D::Draw();
+}
+
+bool CBall::ifScroll()
+{
+	if (CGame::GetBall()->GetPosition().x >= SCROLLBALLPOS &&
+		CGame::GetGoal()->GetObject(CGoal::FLAG_POLE)->GetPosition().x >= SCROLLFLAGPOS)
+	{
+		return true;
+	}
+
+	return false;
 }

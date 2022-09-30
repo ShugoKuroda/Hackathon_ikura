@@ -13,6 +13,8 @@
 #include "object2D.h"
 #include "library.h"
 #include "fade.h"
+#include "game.h"
+#include "ball.h"
 
 #include "fade_scene.h"
 #include "library.h"
@@ -30,8 +32,8 @@ using namespace LibrarySpace;
 LPDIRECT3DTEXTURE9 CGoal::m_apTexture[OBJ_MAX] = { nullptr };
 //const float CGoal::SIZE_X = 100.0f;
 //const float CGoal::SIZE_Y = 500.0f;
-const int CGoal::RAND_POS_X_MIN = 100;
-const int CGoal::RAND_POS_X_MAX = 500;
+const int CGoal::RAND_POS_X_MIN = 3000;
+const int CGoal::RAND_POS_X_MAX = 5500;
 
 //-----------------------------------------------------------------------------------------------
 // コンストラクタ
@@ -165,8 +167,21 @@ void CGoal::Uninit()
 //-----------------------------------------------------------------------------------------------
 void CGoal::Update()
 {
+	float m_fMoveQuantity = 0.0f;
+	if (CGame::GetBall()->ifScroll())
+	{
+		m_fMoveQuantity = CGame::GetBall()->GetSpeed();	// 玉の移動速度
+	}
+
+	for (int nCnt = 0; nCnt < OBJ_MAX; nCnt++)
+	{
+		// 地面の位置情報更新
+ 		m_apObject2D[nCnt]->SetPosition(D3DXVECTOR3(m_apObject2D[nCnt]->GetPosition().x - m_fMoveQuantity, m_apObject2D[nCnt]->GetPosition().y, 0.0f));
+		m_apObject2D[nCnt]->SetVertex();
+	}
 }
 
 void CGoal::Draw()
 {
+
 }

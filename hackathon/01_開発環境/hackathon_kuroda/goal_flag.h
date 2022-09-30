@@ -4,10 +4,10 @@
 // Author : SHUGO KURODA
 //
 //=============================================================================
-#ifndef _GOLD_FLAG_H_
-#define _GOLD_FLAG_H_
+#ifndef _GOAL_FLAG_H_
+#define _GOAL_FLAG_H_
 
-#include "object.h"
+#include "object2D.h"
 
 //*****************************************************************************
 // 前方宣言
@@ -17,7 +17,7 @@ class CObject2D;
 //-----------------------------------------------------------------------------
 // ベースクラス(派生クラス)
 //-----------------------------------------------------------------------------
-class CGoal : public CObject
+class CGoal : public CObject2D
 {
 private:		// 定数
 	//// サイズ(X)
@@ -53,6 +53,8 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
+
+	CObject2D *GetObject(int num) { return m_apObject2D[num]; }
 
 private:
 	//メンバ変数
