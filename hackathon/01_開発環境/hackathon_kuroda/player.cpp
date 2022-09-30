@@ -195,11 +195,18 @@ void CPlayer::Update()
 	else if (m_bSwing == true)
 	{
 		m_bControl = false;
-
-		if (fRot <= MAX_SWING_ROT)
+		if (m_pGauge)
 		{
-			// ‰ñ“]—¦‚Ì‘‰Á
-			fRot += 0.15f;
+			if (m_pGauge->SetEndGauge())
+			{
+				if (fRot <= MAX_SWING_ROT)
+				{
+					// ‰ñ“]—¦‚Ì‘‰Á
+					fRot += 0.15f;
+				}
+
+			}
+			
 		}
 	}
 

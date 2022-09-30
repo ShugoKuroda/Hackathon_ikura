@@ -11,6 +11,7 @@
 #include "gaugeframe.h"
 //#include "Polygon.h"
 //#include "gaugeber.h"
+static const float MaxendDelay = 20.0f;
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
@@ -19,6 +20,7 @@ CGauge::CGauge()
 {
 
 	m_pFrame = nullptr;
+	m_bEndDelay = MaxendDelay;
 }
 //-----------------------------------------------------------------------------
 // デストラクタ
@@ -75,7 +77,10 @@ void CGauge::Uninit()
 
 void CGauge::Update()
 {
-
+	if (m_pGaugeBer)
+	{
+		m_fValue = m_pGaugeBer->GetGaugeValue();
+	}
 
 }
 //-----------------------------------------------------------------------------
@@ -99,11 +104,48 @@ void CGauge::SetAddGauge(float AddValue)
 	}
 }
 
+bool CGauge::SetEndGauge()
+{
+	bool bEndGaugeBer = false;
+	bool bEndGaugeFrame = false;
+	m_bEndDelay--;
+	if (m_bEndDelay <= 0.0f)
+	{
+		if (m_pGaugeBer)
+		{
+			float fBerCola = m_pGaugeBer->GetCol().a;
+			fBerCola -= 0.03f;
+			m_pGaugeBer->SetCol({ 1.0,1.0,1.0,fBerCola });
+			if (fBerCola <= 0.0f)
+			{
+				m_pGaugeBer->Uninit();
+				m_pGaugeBer = nullptr;
+				m_bEndGaugeBer = true;
+			}
+
+		}
+		if (m_pFrame)
+		{
+			float fFrameCola = m_pFrame->GetCol().a;
+			fFrameCola -= 0.03f;
+			m_pFrame->SetCol({ 1.0,1.0,1.0,fFrameCola });
+			if (fFrameCola <= 0.0f)
+			{
+				m_pFrame->Uninit();
+				m_pFrame = nullptr;
+				m_bEndGaugeFrame = true;
+			}
+		}
+
+	}
+	if (m_bEndGaugeFrame&&m_bEndGaugeBer)
+	{
+		return true;
+	}
+	return false;
+}
+
 float CGauge::GetGaugeValue()
 {
-	if (m_pGaugeBer)
-	{
-		return m_pGaugeBer->GetGaugeValue();
-	}
-	return 0.0f;
+	return m_fValue;
 }
