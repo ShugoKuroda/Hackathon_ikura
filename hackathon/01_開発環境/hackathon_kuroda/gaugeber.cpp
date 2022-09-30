@@ -153,6 +153,26 @@ void CGaugeber::Draw()
 
 }
 
+<<<<<<< HEAD
+=======
+	/*VERTEX_2D *pVtx;
+
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+	バッファの生成
+	pVtx[0].pos = D3DXVECTOR3(pos.x, pos.y - scale.y, 0.0f);
+	pVtx[1].pos = D3DXVECTOR3(pos.x + scale.x, pos.y - scale.y, 0.0f);
+	pVtx[2].pos = D3DXVECTOR3(pos.x, pos.y + scale.y, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(pos.x + scale.x, pos.y + scale.y, 0.0f);
+
+	pVtx[0].tex = D3DXVECTOR2(0.0, 0.0);
+	pVtx[1].tex = D3DXVECTOR2((1.0f / m_fMaxGauge)*scale.x, 0.0);
+	pVtx[2].tex = D3DXVECTOR2(0.0, 1.0);
+	pVtx[3].tex = D3DXVECTOR2((1.0f / m_fMaxGauge)*scale.x, 1.0);
+
+	m_pVtxBuff->Unlock();*/
+
+}
+>>>>>>> de3ba2ad2d86587da041b9b00c9f5d9adab05670
 //--------------------------------------------------------------------
 //ゲージの増減処理
 //--------------------------------------------------------------------

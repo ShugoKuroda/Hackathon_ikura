@@ -62,7 +62,7 @@ HRESULT CBg::Load()
 
 	// テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/Sky.png", &m_apSkyTexture[SKYBG_SKY]);			// 空
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/Cloud.png", &m_apSkyTexture[SKYBG_CLOUD]);		// 雲
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/cloud001.png", &m_apSkyTexture[SKYBG_CLOUD]);		// 雲
 
 	for (int nCnt = 0; nCnt < m_nGround; nCnt++)
 	{
@@ -197,6 +197,8 @@ void CBg::Uninit()
 //-----------------------------------------------------------------------------------------------
 void CBg::Update()
 {
+	m_fMoveQuantity = 0;
+
 	// 位置情報を取得
 	D3DXVECTOR3 pos = CObject2D::GetPosition();
 
@@ -209,16 +211,26 @@ void CBg::Update()
 	if (pKeyboard->GetPress(CInputKeyboard::KEYINFO_RIGHT) &&
 		!pKeyboard->GetPress(CInputKeyboard::KEYINFO_LEFT))
 	{
-		m_fMoveQuantity += 16;	// 玉の移動速度
+		m_fMoveQuantity += 32;	// 玉の移動速度
 	}
 
 	for (int nCnt = 0; nCnt < m_nGround; nCnt++)
 	{
+		D3DXVECTOR2 ScreenSize = D3DXVECTOR2((float)CRenderer::SCREEN_WIDTH, (float)CRenderer::SCREEN_HEIGHT);
+
 		// 地面の位置情報更新
-		m_apGroundObject2D[nCnt]->SetMove(D3DXVECTOR3(-m_fMoveQuantity, 0.0f, 0.0f));
+		m_apGroundObject2D[nCnt]->SetPosition(D3DXVECTOR3(m_apGroundObject2D[nCnt]->GetPosition().x - m_fMoveQuantity, ScreenSize.y / 2, 0.0f));
 
 		// 地面の頂点座標の設定
 		m_apGroundObject2D[nCnt]->SetVertex();
+
+		if (m_apGroundObject2D[nCnt]->GetPosition().x <= -(ScreenSize.x / 2))
+		{
+			m_apGroundObject2D[nCnt]->SetPosition(D3DXVECTOR3(ScreenSize.x * 2 + (ScreenSize.x / 2), ScreenSize.y / 2, 0.0f));
+
+			// 地面の頂点座標の設定
+			m_apGroundObject2D[nCnt]->SetVertex();
+		}
 	}
 }
 
