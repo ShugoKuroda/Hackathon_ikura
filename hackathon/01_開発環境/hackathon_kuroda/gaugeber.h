@@ -7,7 +7,7 @@
 #ifndef _GAUGEBER_H_
 #define _GAUGEBER_H_
 
-#include "object.h"
+#include "object2D.h"
 
 //*******************************************************************
 // 前方宣言
@@ -27,7 +27,7 @@ public:
 	static HRESULT Load(void);		//テクスチャの読み込み
 	static void Unload(void);		//テクスチャの削除
 	static CGaugeber *Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale,
-		 const int& nMaxValue);			//インスタンス生成処理
+			const int& nMaxValue);			//インスタンス生成処理
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;

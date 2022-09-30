@@ -1,3 +1,35 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (SkyMachine002.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  SkyMachine002.vcxproj -> C:\Users\student\Desktop\Hackathon_ikura\hackathon\01_開発環境\hackathon_kuroda\x64\Debug\hackathon_kuroda.exe
-  SkyMachine002.vcxproj -> C:\Users\student\Desktop\Hackathon_ikura\hackathon\01_開発環境\hackathon_kuroda\x64\Debug\hackathon_kuroda.pdb (Full PDB)
+  title.cpp
+  sound.cpp
+  score.cpp
+  result.cpp
+  renderer.cpp
+  rank.cpp
+  player.cpp
+  pause.cpp
+  object2D.cpp
+  object.cpp
+  number.cpp
+  manager.cpp
+  main.cpp
+  logo.cpp
+  load.cpp
+  library.cpp
+  input_mouse.cpp
+  input_keyboard.cpp
+  input_joypad.cpp
+  input.cpp
+  コードを生成中...
+  コンパイル中...
+  gaugeber.cpp
+c:\users\student\desktop\gitフォルダ\hackathon_ikura\hackathon\01_開発環境\hackathon_kuroda\gaugeber.cpp(90): warning C4244: '=': 'const int' から 'float' への変換です。データが失われる可能性があります。
+  gauge.cpp
+  game.cpp
+  fade_scene.cpp
+  fade.cpp
+  explosion.cpp
+  bg.cpp
+  base.cpp
+  コードを生成中...
+  SkyMachine002.vcxproj -> C:\Users\student\Desktop\Gitフォルダ\Hackathon_ikura\hackathon\01_開発環境\hackathon_kuroda\x64\Debug\hackathon_kuroda.exe
+  SkyMachine002.vcxproj -> C:\Users\student\Desktop\Gitフォルダ\Hackathon_ikura\hackathon\01_開発環境\hackathon_kuroda\x64\Debug\hackathon_kuroda.pdb (Full PDB)

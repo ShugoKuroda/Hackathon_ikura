@@ -17,7 +17,7 @@ class CNumber : public CObject2D
 // ’è”’è‹` //
 public:
 	// UÀ•W‚ÌÅ‘å•ªŠ„”
-	static const int DIVISION_U = 16;
+	static const int DIVISION_U = 10;
 	// VÀ•W‚ÌÅ‘å•ªŠ„”
 	static const int DIVISION_V = 1;
 
