@@ -22,16 +22,7 @@
 #include "rank.h"
 #include "score.h"
 
-#include "cloud.h"
-#include "enemy.h"
-#include "enemy_boss.h"
-#include "bullet.h"
-#include "bullet_option.h"
-#include "barrier.h"
 #include "explosion.h"
-#include "bubble.h"
-#include "effect.h"
-#include "bg_move.h"
 
 //-----------------------------------------------------------------------------------------------
 // using宣言
@@ -42,6 +33,7 @@ using namespace LibrarySpace;
 // 静的メンバ変数
 //-----------------------------------------------------------------------------------------------
 CPlayer *CGame::m_pPlayer = {};
+int CGame::m_nRoundNum = 0;
 
 //-----------------------------------------------------------------------------------------------
 // コンストラクタ
@@ -103,10 +95,8 @@ void CGame::Update()
 {
 	// キーボード情報の取得
 	CInputKeyboard *pKeyboard = CManager::GetInputKeyboard();
-	// ゲームパッド情報の取得
-	CInputJoypad *pJoypad = CManager::GetInputJoypad();
 
-	if (pKeyboard->GetTrigger(CInputKeyboard::KEYINFO_PAUSE) == true || pJoypad->GetTrigger(CInputJoypad::JOYKEY_START, 0) == true)
+	if (pKeyboard->GetTrigger(CInputKeyboard::KEYINFO_PAUSE) == true)
 	{
 		// ポーズ状態の取得
 		bool bPause = CManager::GetPause();
@@ -116,13 +106,6 @@ void CGame::Update()
 			CPause::Create(0);
 		}
 	}
-
-	////雲を生成するかどうか
-	//if (m_bCreateCloud == true)
-	//{
-	//	//雲の生成処理
-	//	CreateCloud();
-	//}
 }
 
 //-----------------------------------------------------------------------------------------------

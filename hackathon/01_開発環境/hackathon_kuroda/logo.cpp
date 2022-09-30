@@ -45,8 +45,6 @@ CLogo::~CLogo()
 // 生成
 // const D3DXVECTOR3& pos → 生成する位置
 // const D3DXVECTOR2& size → 生成するサイズ
-// const float& fRot → 生成する角度
-// const D3DXCOLOR& col → 生成する色
 // const LOGOTYPE& type → 生成する種類
 // const ANIMTYPE& AnimType → アニメーションの種類
 // const int& nCount → 破棄するまでの時間
