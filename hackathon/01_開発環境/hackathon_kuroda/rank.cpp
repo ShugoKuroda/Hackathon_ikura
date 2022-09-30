@@ -72,9 +72,9 @@ HRESULT CRank::Load()
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
 	// テクスチャの読み込み
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/CustomBg001.jpg", &m_apTexture[TYPE_BG]);	// 背景
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/rank000.png", &m_apTexture[TYPE_RANK]);	// ランキングUI
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/UI001.png", &m_apTexture[TYPE_YOU_SCORE]);	// プレイヤー1
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/result000.jpg", &m_apTexture[TYPE_BG]);		// 背景
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/rank000.png", &m_apTexture[TYPE_RANK]);		// ランキングUI
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/rank001.png", &m_apTexture[TYPE_YOU_SCORE]);	// あなたのスコア
 
 	return S_OK;
 }
@@ -123,13 +123,14 @@ HRESULT CRank::Init()
 	// プレイヤースコアの生成
 	m_pScore[5] = CScore::Create(D3DXVECTOR3(PLAYER_SCORE_POS),
 		PLAYER_SCORE_SIZE, PLAYER_SCORE_SPACE);
+
 	// スコアの設定
 	m_aScore[5] = m_nScorePlayer;
 	// UIの生成
 	m_apObject2D[TYPE_YOU_SCORE] = new CObject2D;
 	m_apObject2D[TYPE_YOU_SCORE]->SetObjType(EObject::OBJ_UI);
-	m_apObject2D[TYPE_YOU_SCORE]->SetPosition(D3DXVECTOR3(300.0f, CRenderer::SCREEN_HEIGHT - 50.0f, 0.0f));
-	m_apObject2D[TYPE_YOU_SCORE]->SetSize(D3DXVECTOR2(200.0f, 100.0f));
+	m_apObject2D[TYPE_YOU_SCORE]->SetPosition(D3DXVECTOR3(250.0f, CRenderer::SCREEN_HEIGHT - 50.0f, 0.0f));
+	m_apObject2D[TYPE_YOU_SCORE]->SetSize(D3DXVECTOR2(400.0f, 80.0f));
 	m_apObject2D[TYPE_YOU_SCORE]->Init();
 	m_apObject2D[TYPE_YOU_SCORE]->BindTexture(m_apTexture[TYPE_YOU_SCORE]);
 

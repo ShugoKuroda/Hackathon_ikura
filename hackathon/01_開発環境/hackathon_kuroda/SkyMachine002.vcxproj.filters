@@ -1,69 +1,184 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="input.cpp" />
-    <ClCompile Include="input_joypad.cpp" />
-    <ClCompile Include="input_keyboard.cpp" />
-    <ClCompile Include="input_mouse.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="manager.cpp" />
-    <ClCompile Include="object.cpp" />
-    <ClCompile Include="object2D.cpp" />
-    <ClCompile Include="player.cpp" />
-    <ClCompile Include="renderer.cpp" />
-    <ClCompile Include="sound.cpp" />
-    <ClCompile Include="explosion.cpp" />
-    <ClCompile Include="base.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="result.cpp" />
-    <ClCompile Include="title.cpp" />
-    <ClCompile Include="rank.cpp" />
-    <ClCompile Include="load.cpp" />
-    <ClCompile Include="logo.cpp" />
-    <ClCompile Include="library.cpp" />
-    <ClCompile Include="score.cpp" />
-    <ClCompile Include="number.cpp" />
-    <ClCompile Include="pause.cpp" />
-    <ClCompile Include="fade_scene.cpp" />
-    <ClCompile Include="fade.cpp" />
     <ClCompile Include="gauge.cpp">
-      <Filter>ゲージ</Filter>
+      <Filter>NewFilter1\ゲージ</Filter>
+    </ClCompile>
+    <ClCompile Include="bg.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="base.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="explosion.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="fade_scene.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="input_joypad.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="input_keyboard.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="input_mouse.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="library.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="load.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="logo.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="manager.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="number.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="object2D.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="pause.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="rank.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="score.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="sound.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="title.cpp">
+      <Filter>NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="gaugeber.cpp">
+      <Filter>NewFilter1\ゲージ</Filter>
     </ClCompile>
     <ClCompile Include="bg.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="input.h" />
-    <ClInclude Include="input_joypad.h" />
-    <ClInclude Include="input_keyboard.h" />
-    <ClInclude Include="input_mouse.h" />
-    <ClInclude Include="main.h" />
-    <ClInclude Include="manager.h" />
-    <ClInclude Include="object.h" />
-    <ClInclude Include="object2D.h" />
-    <ClInclude Include="player.h" />
-    <ClInclude Include="renderer.h" />
-    <ClInclude Include="sound.h" />
-    <ClInclude Include="explosion.h" />
-    <ClInclude Include="base.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="result.h" />
-    <ClInclude Include="title.h" />
-    <ClInclude Include="rank.h" />
-    <ClInclude Include="load.h" />
-    <ClInclude Include="logo.h" />
-    <ClInclude Include="library.h" />
-    <ClInclude Include="score.h" />
-    <ClInclude Include="number.h" />
-    <ClInclude Include="pause.h" />
-    <ClInclude Include="fade_scene.h" />
-    <ClInclude Include="fade.h" />
     <ClInclude Include="gauge.h">
-      <Filter>ゲージ</Filter>
+      <Filter>NewFilter1\ゲージ</Filter>
+    </ClInclude>
+    <ClInclude Include="bg.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="base.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="explosion.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="fade_scene.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="input_joypad.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="input_keyboard.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="input_mouse.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="library.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="load.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="logo.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="number.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="object2D.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="pause.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="rank.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="score.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="sound.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="title.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="gaugeber.h">
+      <Filter>NewFilter1\ゲージ</Filter>
     </ClInclude>
     <ClInclude Include="bg.h" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="ゲージ">
+    <Filter Include="NewFilter1">
+      <UniqueIdentifier>{31f80a95-a56e-4b8f-a909-5f631da2582f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NewFilter1\ゲージ">
       <UniqueIdentifier>{3fe3824d-acf6-4e5c-a7f2-1e4f8190ef53}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
