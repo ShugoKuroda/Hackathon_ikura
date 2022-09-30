@@ -58,6 +58,8 @@ private:	//メンバ変数
 	float m_fGaugePower;	// ゲージのどこらへんで止めたか
 	float m_fBallSpeed;		// ゲージから持ってきたやつ
 	bool m_bFall;
+
+	int m_nCntRestart;
 };
 
 #endif //_BALL_H_

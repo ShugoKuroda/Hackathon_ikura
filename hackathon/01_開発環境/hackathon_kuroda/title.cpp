@@ -182,8 +182,6 @@ void CTitle::Update()
 
 			// ƒ‚[ƒh‚ÌÝ’è
 			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_GAME);
-
-
 		}
 	}
 
