@@ -30,7 +30,8 @@
 LPDIRECT3DTEXTURE9 CBg::m_apSkyTexture[SKYBG_MAX] = {};
 LPDIRECT3DTEXTURE9 CBg::m_apGroundTexture[m_nGround] = {};
 
-CObject2D *CBg::m_apObject2D[SKYBG_MAX + m_nGround] = {};
+CObject2D *CBg::m_apSkyObject2D[SKYBG_MAX] = {};
+CObject2D *CBg::m_apGroundObject2D[m_nGround] = {};
 
 float CBg::m_fMoveQuantity = 0;
 
@@ -129,37 +130,37 @@ HRESULT CBg::Init()
 
 	for (int nCnt = 0; nCnt < SKYBG_MAX; nCnt++)
 	{// 生成
-		m_apObject2D[nCnt] = new CObject2D;
+		m_apSkyObject2D[nCnt] = new CObject2D;
 		//オブジェクトの種類設定
-		m_apObject2D[nCnt]->SetObjType(EObject::OBJ_BG);
+		m_apSkyObject2D[nCnt]->SetObjType(EObject::OBJ_BG);
 
-		m_apObject2D[nCnt]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y / 2, 0.0f));
-		m_apObject2D[nCnt]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
+		m_apSkyObject2D[nCnt]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y / 2, 0.0f));
+		m_apSkyObject2D[nCnt]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
 	}
 
 	for (int nCnt = 0; nCnt < SKYBG_MAX; nCnt++)
 	{// 初期化とテクスチャの設定
-		m_apObject2D[nCnt]->Init();
-		m_apObject2D[nCnt]->BindTexture(m_apSkyTexture[nCnt]);
+		m_apSkyObject2D[nCnt]->Init();
+		m_apSkyObject2D[nCnt]->BindTexture(m_apSkyTexture[nCnt]);
 	}
 
 	//=============================================================================
 	// じめん
 	//=============================================================================
-	for (int nCnt = SKYBG_MAX; nCnt < SKYBG_MAX + m_nGround; nCnt++)
+	for (int nCnt = 0; nCnt < m_nGround; nCnt++)
 	{// 生成
-		m_apObject2D[nCnt] = new CObject2D;
+		m_apGroundObject2D[nCnt] = new CObject2D;
 		//オブジェクトの種類設定
-		m_apObject2D[nCnt]->SetObjType(EObject::OBJ_BG);
+		m_apGroundObject2D[nCnt]->SetObjType(EObject::OBJ_BG);
 
-		m_apObject2D[nCnt]->SetPosition(D3DXVECTOR3(ScreenSize.x * nCnt + (ScreenSize.x / 2), ScreenSize.y / 2, 0.0f));
-		m_apObject2D[nCnt]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
+		m_apGroundObject2D[nCnt]->SetPosition(D3DXVECTOR3(ScreenSize.x * nCnt + (ScreenSize.x / 2), ScreenSize.y / 2, 0.0f));
+		m_apGroundObject2D[nCnt]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
 	}
 
-	for (int nCnt = SKYBG_MAX; nCnt < SKYBG_MAX + m_nGround; nCnt++)
+	for (int nCnt = 0; nCnt < m_nGround; nCnt++)
 	{// 初期化とテクスチャの設定
-		m_apObject2D[nCnt]->Init();
-		m_apObject2D[nCnt]->BindTexture(m_apGroundTexture[nCnt]);
+		m_apGroundObject2D[nCnt]->Init();
+		m_apGroundObject2D[nCnt]->BindTexture(m_apGroundTexture[nCnt]);
 	}
 
 	return S_OK;
@@ -172,10 +173,19 @@ void CBg::Uninit()
 {
 	for (int nCnt = 0; nCnt < SKYBG_MAX; nCnt++)
 	{
-		if (m_apObject2D[nCnt] != nullptr)
+		if (m_apSkyObject2D[nCnt] != nullptr)
 		{
-			m_apObject2D[nCnt]->Uninit();
-			m_apObject2D[nCnt] = nullptr;
+			m_apSkyObject2D[nCnt]->Uninit();
+			m_apSkyObject2D[nCnt] = nullptr;
+		}
+	}
+
+	for (int nCnt = 0; nCnt < m_nGround; nCnt++)
+	{
+		if (m_apGroundObject2D[nCnt] != nullptr)
+		{
+			m_apGroundObject2D[nCnt]->Uninit();
+			m_apGroundObject2D[nCnt] = nullptr;
 		}
 	}
 
@@ -202,13 +212,13 @@ void CBg::Update()
 		m_fMoveQuantity += 16;	// 玉の移動速度
 	}
 
-	for (int nCnt = SKYBG_MAX; nCnt < SKYBG_MAX + m_nGround; nCnt++)
+	for (int nCnt = 0; nCnt < m_nGround; nCnt++)
 	{
 		// 地面の位置情報更新
-		m_apObject2D[nCnt]->SetMove(D3DXVECTOR3(-m_fMoveQuantity, 0.0f, 0.0f));
+		m_apGroundObject2D[nCnt]->SetMove(D3DXVECTOR3(-m_fMoveQuantity, 0.0f, 0.0f));
 
 		// 地面の頂点座標の設定
-		m_apObject2D[nCnt]->SetVertex();
+		m_apGroundObject2D[nCnt]->SetVertex();
 	}
 }
 

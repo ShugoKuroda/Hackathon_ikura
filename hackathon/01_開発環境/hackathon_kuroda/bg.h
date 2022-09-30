@@ -34,7 +34,8 @@ public:
 	static HRESULT Load(void);		//テクスチャの読み込み
 	static void Unload(void);		//テクスチャの削除
 	static CBg *Create();			//インスタンス生成処理
-	static CObject2D *GetObjectBg(SkyType index) { return m_apObject2D[index]; }
+	static CObject2D *GetSkyObjectBg(SkyType index) { return m_apSkyObject2D[index]; }
+	static CObject2D *GetGroundObjectBg(int index) { return m_apGroundObject2D[index]; }
 
 	HRESULT Init() override;
 	void Uninit() override;
@@ -53,7 +54,8 @@ private:
 	static LPDIRECT3DTEXTURE9 m_apSkyTexture[SKYBG_MAX];	//テクスチャのポインタ
 	static LPDIRECT3DTEXTURE9 m_apGroundTexture[m_nGround];	//テクスチャのポインタ
 
-	static CObject2D *m_apObject2D[SKYBG_MAX + m_nGround];	//2Dポリゴンへのポインタ
+	static CObject2D *m_apSkyObject2D[SKYBG_MAX];	//2Dポリゴンへのポインタ
+	static CObject2D *m_apGroundObject2D[m_nGround];	//2Dポリゴンへのポインタ
 
 	static float m_fMoveQuantity;	// 画面の総移動量
 };
