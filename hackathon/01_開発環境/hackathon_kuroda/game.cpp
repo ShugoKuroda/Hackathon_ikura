@@ -33,6 +33,8 @@ using namespace LibrarySpace;
 // 静的メンバ変数
 //-----------------------------------------------------------------------------------------------
 CPlayer *CGame::m_pPlayer = {};
+CBg *CGame::m_pBg = {};
+
 int CGame::m_nRoundNum = 0;
 
 //-----------------------------------------------------------------------------------------------
@@ -63,6 +65,9 @@ HRESULT CGame::Init()
 
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(D3DXVECTOR3(300.0f, CRenderer::SCREEN_HEIGHT / 2, 0.0f), 0);
+
+	// 背景生成
+	m_pBg = CBg::Create();
 
 	// ゲームBGM
 	CSound::Play(CSound::SOUND_LABEL_GAME);
@@ -136,6 +141,8 @@ void CGame::LoadAll()
 {
 	// プレイヤー
 	CPlayer::Load();
+	// 背景
+	CBg::Load();
 	// 爆発
 	CExplosion::Load();
 	// スコア
@@ -153,6 +160,8 @@ void CGame::UnloadAll()
 {
 	// プレイヤー
 	CPlayer::Unload();
+	// 背景
+	CBg::Unload();
 	// 爆発
 	CExplosion::Unload();
 	// スコア

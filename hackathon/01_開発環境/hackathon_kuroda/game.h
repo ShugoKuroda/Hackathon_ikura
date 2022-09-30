@@ -12,6 +12,7 @@
 #include "cloud_data.h"
 
 #include "player.h"
+#include "bg.h"
 
 //*****************************************************************************
 // 前方宣言
@@ -38,6 +39,10 @@ public:		//メンバ関数
 
 	// プレイヤー情報の取得
 	static CPlayer *GetPlayer(int nNum) { return m_pPlayer; }
+
+	// プレイヤー情報の取得
+	static CBg *GetBg() { return m_pBg; }
+
 	// プレイヤーのスコアをランキングに設定
 	static void SetPlayerScore();
 
@@ -50,6 +55,9 @@ private:
 private:	//メンバ変数
 	// プレイヤー情報
 	static CPlayer *m_pPlayer;
+	// 背景
+	static CBg *m_pBg;
+
 	// ラウンド数
 	static int m_nRoundNum;
 };

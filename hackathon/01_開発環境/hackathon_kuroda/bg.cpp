@@ -157,13 +157,16 @@ void CBg::Update()
 	//=============================================================================
 	// →が押された
 	//=============================================================================
-	if (pKeyboard->GetPress(DIK_D))
+	if (pKeyboard->GetPress(CInputKeyboard::KEYINFO_RIGHT))
 	{
-		m_fMoveQuantity++;
+		m_fMoveQuantity += 16;
 	}
 
 	//位置情報更新
-	CObject2D::SetPosition(D3DXVECTOR3(pos.x - m_fMoveQuantity, pos.y, pos.z));
+	m_apObject2D[BG_GROUND]->SetMove(D3DXVECTOR3 (-m_fMoveQuantity, 0.0f, 0.0f));
+
+	//頂点座標の設定
+	m_apObject2D[BG_GROUND]->SetVertex();
 }
 
 //-----------------------------------------------------------------------------------------------
