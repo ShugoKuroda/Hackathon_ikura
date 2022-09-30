@@ -112,6 +112,9 @@ HRESULT CLogo::Load()
 	D3DXCreateTextureFromFile(pDevice,
 		"data/TEXTURE/end000.png",
 		&m_pTexture[TYPE_FINISH]);
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/nokori000.png",
+		&m_pTexture[TYPE_NOKORI]);
 
 	return S_OK;
 }
