@@ -14,7 +14,7 @@
 #include "fade_scene.h"
 #include "input_keyboard.h"
 #include "input_joypad.h"
-
+#include "gaugeframe.h"
 #include "score.h"
 #include "number.h"
 #include "logo.h"
@@ -158,6 +158,8 @@ void CGame::LoadAll()
 	// ポーズ画面
 	CPause::Load();
 	CGaugeber::Load();
+	CGaugeFrame::Load();
+
 }
 
 //-----------------------------------------------------------------------------------------------
@@ -180,5 +182,6 @@ void CGame::UnloadAll()
 	// ポーズ画面
 	CPause::Unload();
 	CGaugeber::Unload();
+	CGaugeFrame::Unload();
 
 }
