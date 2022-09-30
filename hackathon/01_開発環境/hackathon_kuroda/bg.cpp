@@ -27,8 +27,10 @@
 // 静的メンバ変数
 //-----------------------------------------------------------------------------------------------
 // テクスチャのポインタ
-LPDIRECT3DTEXTURE9 CBg::m_apTexture[BG_MAX] = {};
-CObject2D *CBg::m_apObject2D[BG_MAX] = {};
+LPDIRECT3DTEXTURE9 CBg::m_apSkyTexture[SKYBG_MAX] = {};
+LPDIRECT3DTEXTURE9 CBg::m_apGroundTexture[m_nGround] = {};
+
+CObject2D *CBg::m_apObject2D[SKYBG_MAX + m_nGround] = {};
 
 float CBg::m_fMoveQuantity = 0;
 
@@ -58,8 +60,13 @@ HRESULT CBg::Load()
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
 	// テクスチャの読み込み
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/Sky.png", &m_apTexture[BG_SKY]);		// 空
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/Ground.png", &m_apTexture[BG_GROUND]);	// 地面
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/Sky.png", &m_apSkyTexture[SKYBG_SKY]);			// 空
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/Cloud.png", &m_apSkyTexture[SKYBG_CLOUD]);		// 雲
+
+	for (int nCnt = 0; nCnt < m_nGround; nCnt++)
+	{
+		D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/Ground.png", &m_apGroundTexture[nCnt]);	// 地面
+	}
 
 	return S_OK;
 }
@@ -69,13 +76,23 @@ HRESULT CBg::Load()
 //-----------------------------------------------------------------------------------------------
 void CBg::Unload()
 {
-	for (int nCnt = 0; nCnt < BG_MAX; nCnt++)
+	for (int nCnt = 0; nCnt < SKYBG_MAX; nCnt++)
 	{
 		// テクスチャの破棄
-		if (m_apTexture[nCnt] != nullptr)
+		if (m_apSkyTexture[nCnt] != nullptr)
 		{
- 			m_apTexture[nCnt]->Release();
-			m_apTexture[nCnt] = nullptr;
+			m_apSkyTexture[nCnt]->Release();
+			m_apSkyTexture[nCnt] = nullptr;
+		}
+	}
+
+	for (int nCnt = 0; nCnt < m_nGround; nCnt++)
+	{
+		// テクスチャの破棄
+		if (m_apGroundTexture[nCnt] != nullptr)
+		{
+			m_apGroundTexture[nCnt]->Release();
+			m_apGroundTexture[nCnt] = nullptr;
 		}
 	}
 }
@@ -102,12 +119,15 @@ CBg *CBg::Create()
 //-----------------------------------------------------------------------------------------------
 HRESULT CBg::Init()
 {
+	//=============================================================================
+	// そら
+	//=============================================================================
 	//スクリーンサイズの保存
 	D3DXVECTOR2 ScreenSize = D3DXVECTOR2((float)CRenderer::SCREEN_WIDTH, (float)CRenderer::SCREEN_HEIGHT);
 	// 移動量リセット
 	m_fMoveQuantity = 0;
 
-	for (int nCnt = 0; nCnt < BG_MAX; nCnt++)
+	for (int nCnt = 0; nCnt < SKYBG_MAX; nCnt++)
 	{// 生成
 		m_apObject2D[nCnt] = new CObject2D;
 		//オブジェクトの種類設定
@@ -117,10 +137,29 @@ HRESULT CBg::Init()
 		m_apObject2D[nCnt]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
 	}
 
-	for (int nCnt = 0; nCnt < BG_MAX; nCnt++)
+	for (int nCnt = 0; nCnt < SKYBG_MAX; nCnt++)
 	{// 初期化とテクスチャの設定
 		m_apObject2D[nCnt]->Init();
-		m_apObject2D[nCnt]->BindTexture(m_apTexture[nCnt]);
+		m_apObject2D[nCnt]->BindTexture(m_apSkyTexture[nCnt]);
+	}
+
+	//=============================================================================
+	// じめん
+	//=============================================================================
+	for (int nCnt = SKYBG_MAX; nCnt < SKYBG_MAX + m_nGround; nCnt++)
+	{// 生成
+		m_apObject2D[nCnt] = new CObject2D;
+		//オブジェクトの種類設定
+		m_apObject2D[nCnt]->SetObjType(EObject::OBJ_BG);
+
+		m_apObject2D[nCnt]->SetPosition(D3DXVECTOR3(ScreenSize.x * nCnt + (ScreenSize.x / 2), ScreenSize.y / 2, 0.0f));
+		m_apObject2D[nCnt]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
+	}
+
+	for (int nCnt = SKYBG_MAX; nCnt < SKYBG_MAX + m_nGround; nCnt++)
+	{// 初期化とテクスチャの設定
+		m_apObject2D[nCnt]->Init();
+		m_apObject2D[nCnt]->BindTexture(m_apGroundTexture[nCnt]);
 	}
 
 	return S_OK;
@@ -131,7 +170,7 @@ HRESULT CBg::Init()
 //-----------------------------------------------------------------------------------------------
 void CBg::Uninit()
 {
-	for (int nCnt = 0; nCnt < BG_MAX; nCnt++)
+	for (int nCnt = 0; nCnt < SKYBG_MAX; nCnt++)
 	{
 		if (m_apObject2D[nCnt] != nullptr)
 		{
@@ -157,16 +196,20 @@ void CBg::Update()
 	//=============================================================================
 	// →が押された
 	//=============================================================================
-	if (pKeyboard->GetPress(CInputKeyboard::KEYINFO_RIGHT))
+	if (pKeyboard->GetPress(CInputKeyboard::KEYINFO_RIGHT) &&
+		!pKeyboard->GetPress(CInputKeyboard::KEYINFO_LEFT))
 	{
-		m_fMoveQuantity += 16;
+		m_fMoveQuantity += 16;	// 玉の移動速度
 	}
 
-	//位置情報更新
-	m_apObject2D[BG_GROUND]->SetMove(D3DXVECTOR3 (-m_fMoveQuantity, 0.0f, 0.0f));
+	for (int nCnt = SKYBG_MAX; nCnt < SKYBG_MAX + m_nGround; nCnt++)
+	{
+		// 地面の位置情報更新
+		m_apObject2D[nCnt]->SetMove(D3DXVECTOR3(-m_fMoveQuantity, 0.0f, 0.0f));
 
-	//頂点座標の設定
-	m_apObject2D[BG_GROUND]->SetVertex();
+		// 地面の頂点座標の設定
+		m_apObject2D[nCnt]->SetVertex();
+	}
 }
 
 //-----------------------------------------------------------------------------------------------

@@ -20,11 +20,11 @@ class CObject2D;
 class CBg : public CObject2D
 {
 public:
-	enum BGtype
+	enum SkyType
 	{//背景の種類
-		BG_SKY = 0,		// 空
-		BG_GROUND,		// 地面
-		BG_MAX			// 背景の最大数
+		SKYBG_SKY = 0,		// 空
+		SKYBG_CLOUD,		// 地面
+		SKYBG_MAX			// 背景の最大数
 	};
 
 	CBg();
@@ -34,7 +34,7 @@ public:
 	static HRESULT Load(void);		//テクスチャの読み込み
 	static void Unload(void);		//テクスチャの削除
 	static CBg *Create();			//インスタンス生成処理
-	static CObject2D *GetObjectBg(BGtype index) { return m_apObject2D[index]; }
+	static CObject2D *GetObjectBg(SkyType index) { return m_apObject2D[index]; }
 
 	HRESULT Init() override;
 	void Uninit() override;
@@ -48,8 +48,12 @@ public:
 
 private:
 	//メンバ変数
-	static LPDIRECT3DTEXTURE9 m_apTexture[BG_MAX];	//テクスチャのポインタ
-	static CObject2D *m_apObject2D[BG_MAX];			//2Dポリゴンへのポインタ
+	static const int m_nGround = 3;
+
+	static LPDIRECT3DTEXTURE9 m_apSkyTexture[SKYBG_MAX];	//テクスチャのポインタ
+	static LPDIRECT3DTEXTURE9 m_apGroundTexture[m_nGround];	//テクスチャのポインタ
+
+	static CObject2D *m_apObject2D[SKYBG_MAX + m_nGround];	//2Dポリゴンへのポインタ
 
 	static float m_fMoveQuantity;	// 画面の総移動量
 };
