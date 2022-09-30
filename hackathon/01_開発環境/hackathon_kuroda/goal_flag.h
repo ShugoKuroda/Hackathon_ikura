@@ -39,7 +39,7 @@ public:
 	~CGoal() override;
 
 	// 生成
-	static CGoal* Create(const int& nRandPosX);
+	static CGoal* Create();
 
 	//メンバ関数
 	static HRESULT Load();		//テクスチャの読み込み

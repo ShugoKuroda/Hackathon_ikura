@@ -14,6 +14,7 @@
 #include "player.h"
 #include "bg.h"
 #include "ball.h"
+#include "goal_flag.h"
 
 //*****************************************************************************
 // 前方宣言
@@ -63,6 +64,8 @@ private:	//メンバ変数
 	static CBg *m_pBg;
 	// たま
 	static CBall *m_pBall;
+	// 旗
+	static CGoal *m_pGoal;
 
 	// ラウンド数
 	static int m_nRoundNum;

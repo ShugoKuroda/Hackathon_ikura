@@ -40,6 +40,8 @@ CGoal::CGoal() :m_move(0.0f, 0.0f, 0.0f)
 	{
 		m_apObject2D[nCnt] = nullptr;
 	}
+
+	SetObjType(CObject::OBJ_GOAL);
 }
 
 //-----------------------------------------------------------------------------------------------
@@ -51,36 +53,16 @@ CGoal::~CGoal()
 
 //-----------------------------------------------------------------------------------------------
 // 生成
-// const int & nRandPosX → 生成するX軸の位置(ランダム)
 //-----------------------------------------------------------------------------------------------
-CGoal* CGoal::Create(const int& nRandPosX)
+CGoal* CGoal::Create()
 {
 	// ポインタクラスを宣言
 	CGoal* pGoal = new CGoal;
 
 	if (pGoal != nullptr)
 	{// もしnullptrではなかったら
-
-		// 位置設定
-		pGoal->SetPosition(pos);
-
-		// サイズの保存
-		pGoal->m_DefaultSize = size;
-
-		// アニメーションの種類を設定
-		pGoal->m_AnimType = AnimType;
-
-		// 破棄カウンターを設定
-		pGoal->m_nCountUninit = nCount;
-
 		// 初期化
 		pGoal->Init();
-
-		// 種類の設定
-		pGoal->m_type = type;
-
-		// テクスチャの設定
-		pGoal->BindTexture(m_pTexture[type]);
 	}
 
 	return pGoal;
@@ -134,15 +116,15 @@ HRESULT CGoal::Init()
 		m_apObject2D[nCnt] = new CObject2D;
 	}
 
-	// 背景
-	m_apObject2D[FLAG_POLE]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y / 2, 0.0f));
-	m_apObject2D[FLAG_POLE]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
-	// タイトルロゴ
-	m_apObject2D[FLAG_HOLE_DOWN]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, -ScreenSize.y / 2, 0.0f));
-	m_apObject2D[FLAG_HOLE_DOWN]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
-	// PRESS_SPACEロゴ
-	m_apObject2D[FLAG_HOLE_UP]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y / 2, 0.0f));
-	m_apObject2D[FLAG_HOLE_UP]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
+	// 旗のポール
+	m_apObject2D[FLAG_POLE]->SetPosition(D3DXVECTOR3((ScreenSize.x / 2) + 50.0f, (ScreenSize.y / 2) - 20.0f, 0.0f));
+	m_apObject2D[FLAG_POLE]->SetSize(D3DXVECTOR2(100.0f, 500.0f));
+	// ゴール穴上部
+	m_apObject2D[FLAG_HOLE_UP]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y - 170.0f, 0.0f));
+	m_apObject2D[FLAG_HOLE_UP]->SetSize(D3DXVECTOR2(70.0f, 50.0f));
+	// ゴール穴下部
+	m_apObject2D[FLAG_HOLE_DOWN]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y - 170.0f, 0.0f));
+	m_apObject2D[FLAG_HOLE_DOWN]->SetSize(D3DXVECTOR2(70.0f, 50.0f));
 
 	for (int nCnt = 0; nCnt < OBJ_MAX; nCnt++)
 	{// 初期化とテクスチャの設定
@@ -150,17 +132,8 @@ HRESULT CGoal::Init()
 		m_apObject2D[nCnt]->BindTexture(m_apTexture[nCnt]);
 	}
 
-	//背景とプレイヤーロゴ以外を前に描画する(タイプを設定する)
-	m_apObject2D[FLAG_POLE]->SetObjType(CObject::OBJ_TITLE);
-	//プレイヤーロゴを背景の次に描画する
-	m_apObject2D[FLAG_HOLE_DOWN]->SetObjType(CObject::OBJ_TITLE_LOGO);
-	m_apObject2D[FLAG_HOLE_UP]->SetObjType(CObject::OBJ_TITLE_LOGO);
-
-	//タイトルとPressロゴを透明にする
-	m_apObject2D[FLAG_HOLE_UP]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
-
-	// タイトルBGM
-	CSound::Play(CSound::SOUND_LABEL_TITLE);
+	//穴の下部を次に描画する
+	m_apObject2D[FLAG_HOLE_DOWN]->SetObjType(CObject::OBJ_GOAL_HOLE);
 
 	return S_OK;
 }
@@ -178,12 +151,6 @@ void CGoal::Uninit()
 			m_apObject2D[nCnt] = nullptr;
 		}
 	}
-
-	//タイトルテクスチャの破棄
-	CGoal::Unload();
-
-	// タイトルBGM
-	CSound::Stop();
 }
 
 //-----------------------------------------------------------------------------------------------
@@ -191,90 +158,6 @@ void CGoal::Uninit()
 //-----------------------------------------------------------------------------------------------
 void CGoal::Update()
 {
-	// キーボード情報の取得
-	CInputKeyboard *pKeyboard = CManager::GetInputKeyboard();
-
-	// 位置の取得
-	D3DXVECTOR3 pos = m_apObject2D[FLAG_HOLE_DOWN]->GetPosition();
-
-	// タイトルロゴが移動しきるまで移動
-	if (pos.y <= CRenderer::SCREEN_HEIGHT / 2)
-	{
-		pos.y += 5.0f;
-	}
-	else
-	{
-		m_bDrawPress = true;
-	}
-
-	if (pKeyboard->GetTrigger(CInputKeyboard::KEYINFO_ATTACK) == true)
-	{//攻撃キー押下
-		if (m_bDrawPress == false)
-		{
-			pos.y = CRenderer::SCREEN_HEIGHT / 2;
-			m_bDrawPress = true;
-		}
-		else if (m_bPush == false && m_bDrawPress == true)
-		{
-			m_bPush = true;
-
-			// モードの設定
-			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_GAME);
-
-
-		}
-	}
-
-	if (m_bDrawPress == true)
-	{
-		// 色の取得
-		D3DXCOLOR col = m_apObject2D[FLAG_HOLE_UP]->GetColor();
-
-		// PRESSロゴを点滅させる
-		if (m_bPressFade == false)
-		{
-			// a値を加算
-			col.a += 0.02f;
-			// a値の加算が終わったら
-			if (col.a >= 1.0f)
-			{// a値の減算を始める
-				m_bPressFade = true;
-			}
-		}
-		else if (m_bPressFade == true)
-		{
-			// a値を減算
-			col.a -= 0.02f;
-			// a値の減算が終わったら
-			if (col.a <= 0.0f)
-			{// a値の加算を始める
-				m_bPressFade = false;
-			}
-		}
-
-		// PRESSロゴの色を設定
-		m_apObject2D[FLAG_HOLE_UP]->SetColor(col);
-	}
-
-	// 画面遷移中はリセットしない
-	if (m_bPush == false)
-	{
-		// タイトル画面をループさせるまでの時間
-		m_nCntLoop++;
-
-		// 50秒経過でタイトル画面リセット
-		if (m_nCntLoop >= 5000)
-		{
-			//カウンターリセット
-			m_nCntLoop = 0;
-
-			// モードの設定
-			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_TITLE);
-		}
-	}
-
-	m_apObject2D[FLAG_HOLE_DOWN]->SetPosition(pos);
-	m_apObject2D[FLAG_HOLE_DOWN]->SetVertex();
 }
 
 void CGoal::Draw()

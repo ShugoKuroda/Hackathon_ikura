@@ -35,6 +35,7 @@ using namespace LibrarySpace;
 CPlayer *CGame::m_pPlayer = {};
 CBg *CGame::m_pBg = {};
 CBall *CGame::m_pBall = {};
+CGoal *CGame::m_pGoal = {};
 
 int CGame::m_nRoundNum = 0;
 
@@ -72,6 +73,9 @@ HRESULT CGame::Init()
 
 	// îwåiê∂ê¨
 	m_pBall = CBall::Create(D3DXVECTOR3(300.0f, CRenderer::SCREEN_HEIGHT / 2, 0.0f), 0);
+
+	// ä¯
+	m_pGoal = CGoal::Create();
 
 	// ÉQÅ[ÉÄBGM
 	CSound::Play(CSound::SOUND_LABEL_GAME);
