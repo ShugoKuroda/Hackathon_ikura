@@ -128,9 +128,9 @@ void CBall::Update()
 	// ˆÊ’uî•ñ‚ðŽæ“¾
 	float fRot = CObject2D::GetRot();
 
-	m_bSwing = CGame::GetPlayer(0)->GetSwing();
+	m_bSwing = CGame::GetPlayer()->GetSwing();
 
-	if (m_bSwing && CGame::GetPlayer(0)->GetRot() >= 0.0f)
+	if (m_bSwing && CGame::GetPlayer()->GetRot() >= 0.0f)
 	{
 		if (m_bEnterPower)
 		{
@@ -144,7 +144,7 @@ void CBall::Update()
 
 		else
 		{
-			m_fGaugePower = CGame::GetPlayer(0)->GetGauge()->GetGaugeValue();
+			m_fGaugePower = CGame::GetPlayer()->GetGauge()->GetGaugeValue();
 			m_fBallSpeed = m_fGaugePower * 10.0f;
 		}
 
