@@ -14,6 +14,7 @@
 //*******************************************************************
 class CScore;
 class CGauge;
+
 //*******************************************************************
 //	プレイヤークラスの定義
 //*******************************************************************
@@ -60,6 +61,7 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
+	void SetControl(bool bControl) { m_bControl = bControl; }
 
 	STATE GetState() { return m_state; }
 	// スコア情報の取得

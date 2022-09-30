@@ -176,3 +176,11 @@ void CGaugeber::SetCol(D3DXCOLOR col)
 		m_apGaugeBer->SetColor(col);
 	}
 }
+
+D3DXCOLOR CGaugeber::GetCol()
+{
+	if (m_apGaugeBer)
+	{
+		return m_apGaugeBer->GetColor();
+	}
+}

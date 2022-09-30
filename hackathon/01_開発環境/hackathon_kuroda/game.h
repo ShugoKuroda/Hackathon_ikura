@@ -72,6 +72,8 @@ private:	//メンバ変数
 
 	// ラウンド数
 	static int m_nRoundNum;
+	// ロゴ生成までのカウンター
+	int m_nCounterLogo;
 };
 
 #endif	//_GAME_H_
