@@ -13,6 +13,7 @@
 
 #include "player.h"
 #include "bg.h"
+#include "ball.h"
 
 //*****************************************************************************
 // 前方宣言
@@ -40,8 +41,11 @@ public:		//メンバ関数
 	// プレイヤー情報の取得
 	static CPlayer *GetPlayer() { return m_pPlayer; }
 
-	// プレイヤー情報の取得
+	// 背景情報の取得
 	static CBg *GetBg() { return m_pBg; }
+
+	// たま取得
+	static CBall *GetBall() { return m_pBall; }
 
 	// プレイヤーのスコアをランキングに設定
 	static void SetPlayerScore();
@@ -57,6 +61,8 @@ private:	//メンバ変数
 	static CPlayer *m_pPlayer;
 	// 背景
 	static CBg *m_pBg;
+	// たま
+	static CBall *m_pBall;
 
 	// ラウンド数
 	static int m_nRoundNum;

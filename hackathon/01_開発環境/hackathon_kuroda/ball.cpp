@@ -1,6 +1,6 @@
 //=============================================================================
 //
-//	プレイヤー処理[player.cpp]
+//	プレイヤー処理[ball.cpp]
 //	Author : SHUGO KURODA
 //
 //=============================================================================
@@ -9,47 +9,26 @@
 #include "input_joypad.h"
 #include "sound.h"
 #include "renderer.h"
-#include "library.h"
-#include "bg.h"
-#include "bullet.h"
-#include "player.h"
-#include "explosion.h"
-#include "score.h"
-#include "rank.h"
-#include "gauge.h"
-#include "game.h"
 
-//-----------------------------------------------------------------------------
-// マクロ定義
-//-----------------------------------------------------------------------------
-#define PLAYER_UI_SIZE		(D3DXVECTOR2(200.0f, 50.0f))
-#define LIFE_UI_SIZE		(D3DXVECTOR2(120.0f, 30.0f))
-#define LEVEL_UI_SIZE		(D3DXVECTOR2(50.0f, 50.0f))
-#define ATTACK_INTERVAL		(7)
-#define MAX_SWING_ROT		(D3DX_PI/2)
-#define MAX_CHARGE_ROT		(-D3DX_PI/2)
-//-----------------------------------------------------------------------------
-// using宣言
-//-----------------------------------------------------------------------------
-using namespace LibrarySpace;
+#include "game.h"
+#include "player.h"
+#include "ball.h"
+#include "gauge.h"
 //*****************************************************************************
 // 定数宣言
 //*****************************************************************************
-const float CPlayer::SIZE_X = 200.0f;
-const float CPlayer::SIZE_Y = 600.0f;
-const float CPlayer::MOVE_DEFAULT = 10.0f;
-const D3DXVECTOR3 GaugePos = { 300.0f,500.0f,0.0f };
+const float CBall::SIZE_X = 60.0f;
+const float CBall::SIZE_Y = 60.0f;
 //*****************************************************************************
 // 静的メンバ変数宣言
 //*****************************************************************************
 // テクスチャのポインタ
-LPDIRECT3DTEXTURE9 CPlayer::m_apTexture = { nullptr };
+LPDIRECT3DTEXTURE9 CBall::m_apTexture = { nullptr };
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CPlayer::CPlayer() :
-	m_move(0.0f, 0.0f, 0.0f), m_state(STATE_NORMAL), m_nCntState(0), m_nCntAttack(0), m_bControl(false), m_pScore(nullptr), m_bSwing(false)
+CBall::CBall() : m_move(0.0f, 0.0f, 0.0f)
 {
 	//オブジェクトの種類設定
 	SetObjType(EObject::OBJ_PLAYER);
@@ -59,17 +38,17 @@ CPlayer::CPlayer() :
 //-----------------------------------------------------------------------------
 // デストラクタ
 //-----------------------------------------------------------------------------
-CPlayer::~CPlayer()
+CBall::~CBall()
 {
 }
 
 //-----------------------------------------------------------------------------
 // インスタンス生成処理
 //-----------------------------------------------------------------------------
-CPlayer *CPlayer::Create(const D3DXVECTOR3& pos, const int& nNum)
+CBall *CBall::Create(const D3DXVECTOR3& pos, const int& nNum)
 {
 	//インスタンス生成
-	CPlayer *pPlayer = new CPlayer;
+	CBall *pPlayer = new CBall;
 
 	if (pPlayer != nullptr)
 	{
@@ -87,14 +66,14 @@ CPlayer *CPlayer::Create(const D3DXVECTOR3& pos, const int& nNum)
 //-----------------------------------------------------------------------------
 // テクスチャの読み込み
 //-----------------------------------------------------------------------------
-HRESULT CPlayer::Load()
+HRESULT CBall::Load()
 {
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
 	// テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
-		"data/TEXTURE/PutterClub000.png",
+		"data/TEXTURE/GolfBall.png",
 		&m_apTexture);
 
 	return S_OK;
@@ -103,7 +82,7 @@ HRESULT CPlayer::Load()
 //-----------------------------------------------------------------------------
 //	テクスチャの削除
 //-----------------------------------------------------------------------------
-void CPlayer::Unload()
+void CBall::Unload()
 {
 	// テクスチャの破棄
 	if (m_apTexture != nullptr)
@@ -116,18 +95,16 @@ void CPlayer::Unload()
 //-----------------------------------------------------------------------------
 // 初期化処理
 //-----------------------------------------------------------------------------
-HRESULT CPlayer::Init()
+HRESULT CBall::Init()
 {
-	// 登場状態にする
-	m_state = STATE_ENTRY;
+	m_bSwing = false;
+	m_fGaugePower = 0.0f;
+	m_fBallSpeed = 0.0f;
 
 	// サイズの設定
 	CObject2D::SetSize(D3DXVECTOR2(SIZE_X, SIZE_Y));
 	// 初期化
 	CObject2D::Init();
-
-	// 操作可能状態にする
-	m_bControl = true;
 
 	return S_OK;
 }
@@ -135,7 +112,7 @@ HRESULT CPlayer::Init()
 //-----------------------------------------------------------------------------
 // 終了処理
 //-----------------------------------------------------------------------------
-void CPlayer::Uninit()
+void CBall::Uninit()
 {
 	CObject2D::Uninit();
 }
@@ -143,74 +120,41 @@ void CPlayer::Uninit()
 //-----------------------------------------------------------------------------
 // 更新処理
 //-----------------------------------------------------------------------------
-void CPlayer::Update()
+void CBall::Update()
 {
 	// 位置情報を取得
 	D3DXVECTOR3 pos = CObject2D::GetPosition();
 
-	// キーボード情報の取得
-	CInputKeyboard *pKeyboard = CManager::GetInputKeyboard();
-
 	// 位置情報を取得
 	float fRot = CObject2D::GetRot();
 
-	// 
-	if (pKeyboard->GetPress(CInputKeyboard::KEYINFO_ATTACK) == true && m_bControl == true)
-	{//攻撃キー押下 && 操作可能状態なら
+	m_bSwing = CGame::GetPlayer()->GetSwing();
 
-		// 振りかぶっている状態にする
-		m_bSwing = true;
-
-	 	// 回転率の増加
-		fRot -= 0.01f;
-
-		////攻撃カウンターの加算
-		//m_nCntAttack++;
-
-		//if (m_nCntAttack > ATTACK_INTERVAL)
-		//{
-		//	//攻撃カウンターをリセット
-		//	m_nCntAttack = 0;
-
-		//	//サウンド再生
-		//	CSound::Play(CSound::SOUND_LABEL_SE_SHOT);
-		//}
-		//ゲージを表示させる
-		//ヌルチェック
-		if (!m_pGauge)
-		{
-			m_pGauge = CGauge::Create(GaugePos, { 500.0f,50.0f,0.0f }, MAX_SWING_ROT);
-		}
-		if (m_pGauge)
-		{
-			//ゲージを増やす
-			m_pGauge->SetAddGauge(0.01f);
-		}
-
-		if (fRot < MAX_CHARGE_ROT)
-		{
-			m_bControl = false;
-		}
-	}
-	else if (m_bSwing == true)
+	if (m_bSwing && CGame::GetPlayer()->GetRot() >= 0.0f)
 	{
-		m_bControl = false;
-
-		if (fRot <= MAX_SWING_ROT)
+		if (m_bEnterPower)
 		{
-			// 回転率の増加
-			fRot += 0.15f;
+			m_fBallSpeed -= 0.05;
+
+			if (m_fBallSpeed <= 0.0f)
+			{
+				m_fBallSpeed = 0.0f;
+			}
 		}
+
+		else
+		{
+			m_fGaugePower = CGame::GetPlayer()->GetGauge()->GetGaugeValue();
+			m_fBallSpeed = m_fGaugePower * 10.0f;
+		}
+
+		m_bEnterPower = true;
 	}
+
+	SetPosition(D3DXVECTOR3(GetPosition().x + m_fBallSpeed, GetPosition().y, 0.0f));
 
 	// 回転率の更新
 	SetRot(fRot);
-
-	//位置情報更新
-	CObject2D::SetPosition(D3DXVECTOR3(GetPosition().x - CGame::GetBg()->GetMoveQuantity(), GetPosition().y, 0.0f));
-
-	//状態管理
-	State();
 
 	//頂点座標の設定
 	CObject2D::SetVertex();
@@ -219,28 +163,8 @@ void CPlayer::Update()
 //-----------------------------------------------------------------------------
 // 描画処理
 //-----------------------------------------------------------------------------
-void CPlayer::Draw()
+void CBall::Draw()
 {
 	//描画
 	CObject2D::Draw();
-}
-
-//-----------------------------------------------------------------------------
-// 状態管理
-//-----------------------------------------------------------------------------
-void CPlayer::State()
-{
-	switch (m_state)
-	{
-	case CPlayer::STATE_NORMAL:
-		break;
-	case CPlayer::STATE_ENTRY:
-		break;
-	case CPlayer::STATE_RESPAWN:
-		break;
-	case CPlayer::STATE_DIE:
-		break;
-	default:
-		break;
-	}
 }
