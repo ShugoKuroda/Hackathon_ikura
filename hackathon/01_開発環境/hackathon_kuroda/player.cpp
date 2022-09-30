@@ -49,7 +49,8 @@ LPDIRECT3DTEXTURE9 CPlayer::m_apTexture = { nullptr };
 // コンストラクタ
 //-----------------------------------------------------------------------------
 CPlayer::CPlayer() :
-	m_move(0.0f, 0.0f, 0.0f), m_state(STATE_NORMAL), m_nCntState(0), m_nCntAttack(0), m_bControl(false), m_pScore(nullptr), m_bSwing(false), m_bPlayCharge(false)
+	m_move(0.0f, 0.0f, 0.0f), m_state(STATE_NORMAL), m_nCntState(0), m_nCntAttack(0), m_bControl(false), m_pScore(nullptr),
+	m_bSwing(false), m_bPlayCharge(false), m_pLogo(nullptr)
 {
 	//オブジェクトの種類設定
 	SetObjType(EObject::OBJ_PLAYER);
@@ -125,6 +126,9 @@ HRESULT CPlayer::Init()
 	CObject2D::SetSize(D3DXVECTOR2(SIZE_X, SIZE_Y));
 	// 初期化
 	CObject2D::Init();
+
+	m_pLogo = CLogo::Create(D3DXVECTOR3((CRenderer::SCREEN_WIDTH / 2) - 150.0f, 370.0f, 0.0f), D3DXVECTOR2(200.0f, 200.0f),
+		CLogo::TYPE_TUTORIAL, CLogo::ANIM_NONE, 5000);
 
 	return S_OK;
 }
@@ -231,7 +235,12 @@ void CPlayer::Update()
 		m_fMoveQuantity = CGame::GetBall()->GetSpeed();	// 玉の移動速度
 	}
 
-	//位置情報更新
+	// ロゴの位置
+	D3DXVECTOR3 LogoPos = m_pLogo->GetPosition();
+
+	m_pLogo->SetPosition(D3DXVECTOR3(LogoPos.x - m_fMoveQuantity, LogoPos.y, LogoPos.z));
+
+	//位置情報更新1
 	CObject2D::SetPosition(D3DXVECTOR3(GetPosition().x - m_fMoveQuantity, GetPosition().y, 0.0f));
 
 	//状態管理

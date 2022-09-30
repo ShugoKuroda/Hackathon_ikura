@@ -8,6 +8,7 @@
 #define _PLAYER_H_
 
 #include "object2D.h"
+#include "logo.h"
 
 //*******************************************************************
 //	前方宣言
@@ -77,6 +78,8 @@ private:	//メンバ変数
 	CGauge *m_pGauge;
 	// スコアのポインタ
 	CScore *m_pScore;
+	// ロゴのポインタ
+	CLogo *m_pLogo;
 
 	//移動量
 	D3DXVECTOR3 m_move;
