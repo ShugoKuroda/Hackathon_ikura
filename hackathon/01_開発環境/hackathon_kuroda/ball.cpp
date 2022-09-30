@@ -122,6 +122,8 @@ void CBall::Uninit()
 //-----------------------------------------------------------------------------
 void CBall::Update()
 {
+	D3DXVECTOR2 ScreenSize = D3DXVECTOR2((float)CRenderer::SCREEN_WIDTH, (float)CRenderer::SCREEN_HEIGHT);
+
 	// à íuèÓïÒÇéÊìæ
 	D3DXVECTOR3 pos = CObject2D::GetPosition();
 
@@ -134,7 +136,7 @@ void CBall::Update()
 	{
 		if (m_bEnterPower)
 		{
-			m_fBallSpeed -= 0.05;
+			m_fBallSpeed -= 0.02;
 
 			if (m_fBallSpeed <= 0.0f)
 			{
@@ -151,7 +153,15 @@ void CBall::Update()
 		m_bEnterPower = true;
 	}
 
-	SetPosition(D3DXVECTOR3(GetPosition().x + m_fBallSpeed, GetPosition().y, 0.0f));
+	if (!(ifScroll()))
+	{
+		SetPosition(D3DXVECTOR3(GetPosition().x + m_fBallSpeed, GetPosition().y, 0.0f));
+	}
+
+	else
+	{
+		SetPosition(D3DXVECTOR3(GetPosition().x, GetPosition().y, 0.0f));
+	}
 
 	// âÒì]ó¶ÇÃçXêV
 	SetRot(fRot);
