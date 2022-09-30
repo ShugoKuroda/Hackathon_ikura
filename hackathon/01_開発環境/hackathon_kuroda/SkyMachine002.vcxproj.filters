@@ -86,8 +86,13 @@
       <Filter>NewFilter1\ゲージ</Filter>
     </ClCompile>
     <ClCompile Include="bg.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="gaugeframe.cpp">
+      <Filter>NewFilter1\ゲージ</Filter>
+=======
     <ClCompile Include="ball.cpp">
       <Filter>NewFilter1</Filter>
+>>>>>>> ad92dc3bf1f549462d3d3c2050a6a7d9e4ca721c
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,8 +181,13 @@
       <Filter>NewFilter1\ゲージ</Filter>
     </ClInclude>
     <ClInclude Include="bg.h" />
+<<<<<<< HEAD
+    <ClInclude Include="gaugeframe.h">
+      <Filter>NewFilter1\ゲージ</Filter>
+=======
     <ClInclude Include="ball.h">
       <Filter>NewFilter1</Filter>
+>>>>>>> ad92dc3bf1f549462d3d3c2050a6a7d9e4ca721c
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

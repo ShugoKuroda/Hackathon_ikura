@@ -8,6 +8,7 @@
 #include "gauge.h"
 #include "fade.h"
 #include "gaugeber.h"
+#include "gaugeframe.h"
 //#include "Polygon.h"
 //#include "gaugeber.h"
 //-----------------------------------------------------------------------------
@@ -36,12 +37,13 @@ CGauge *CGauge::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale,
 {
 	CGauge *pGauge = NULL;
 	pGauge = new CGauge();
-	pGauge->m_pGaugeBer = CGaugeber::Create(pos, scale, fMaxValue);
 	//ゲージの枠の生成
-	//if (!pGauge->m_pFrame)
-	//{
-	//	pGauge->m_pFrame = CPolygon::Create({ pos.x + (MaxGauge / 2.0f),pos.y,0.0f }, { scale.x / 1.97f ,scale.y*1.1f,0.0f }, CTexture::GAUGEFRAME, { 1.0,1.0,1.0,1.0 }, OBJTYPE_GAUGEFRAME);
-	//}
+	if (!pGauge->m_pFrame)
+	{
+		pGauge->m_pFrame = CGaugeFrame::Create({ pos.x + (scale.x / 2.0f),pos.y,0.0f }, scale);
+	}
+	pGauge->m_pGaugeBer = CGaugeber::Create(pos, scale, fMaxValue);
+
 	pGauge->Init();
 
 	return pGauge;
@@ -61,11 +63,11 @@ HRESULT CGauge::Init(void)
 
 void CGauge::Uninit()
 {
-	//if (m_pFrame != nullptr)
-	//{
-	//	m_pFrame->Uninit();
-	//	m_pFrame = nullptr;
-	//}
+	if (m_pFrame != nullptr)
+	{
+		m_pFrame->Uninit();
+		m_pFrame = nullptr;
+	}
 }
 //-----------------------------------------------------------------------------
 // 更新処理
