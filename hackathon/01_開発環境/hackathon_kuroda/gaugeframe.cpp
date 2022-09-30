@@ -150,3 +150,12 @@ void CGaugeFrame::SetCol(D3DXCOLOR col)
 		m_apGaugeFrame->SetColor(col);
 	}
 }
+
+D3DXCOLOR CGaugeFrame::GetCol()
+{
+	if (m_apGaugeFrame)
+	{
+		return m_apGaugeFrame->GetColor();
+	}
+	
+}

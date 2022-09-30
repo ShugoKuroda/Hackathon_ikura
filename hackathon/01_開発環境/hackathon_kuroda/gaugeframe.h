@@ -35,6 +35,7 @@ public:
 	void Update() override;
 	void Draw() override;
 	void SetCol(D3DXCOLOR col);
+	D3DXCOLOR GetCol();
 	// ˆÚ“®—Ê
 private:
 	//ƒƒ“ƒo•Ï”

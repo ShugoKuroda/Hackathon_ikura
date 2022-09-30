@@ -26,12 +26,16 @@ public:
 	void Update(void);
 	void Draw(void);
 	void SetAddGauge(float AddValue);//ゲージの増減
-	void SetEndGauge();
+	bool SetEndGauge();
 	float GetGaugeValue();
 private:
 	CGaugeFrame *m_pFrame;//ゲージの枠
 	CGaugeber *m_pGaugeBer;
 	float m_fValue;//ゲージの値
+	float m_bEndDelay;
+	bool m_bEndGaugeBer;
+	bool m_bEndGaugeFrame;
+
 };
 
 #endif // !_TIME_H_*/#pragma once
