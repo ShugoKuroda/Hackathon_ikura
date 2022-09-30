@@ -208,10 +208,9 @@ void CBg::Update()
 	//=============================================================================
 	// ¨‚ª‰Ÿ‚³‚ê‚½
 	//=============================================================================
-	if (pKeyboard->GetPress(CInputKeyboard::KEYINFO_RIGHT) &&
-		!pKeyboard->GetPress(CInputKeyboard::KEYINFO_LEFT))
+	if (1)
 	{
-		m_fMoveQuantity += 32;	// ‹Ê‚ÌˆÚ“®‘¬“x
+		m_fMoveQuantity += CGame::GetBall()->GetSpeed();	// ‹Ê‚ÌˆÚ“®‘¬“x
 	}
 
 	for (int nCnt = 0; nCnt < m_nGround; nCnt++)
