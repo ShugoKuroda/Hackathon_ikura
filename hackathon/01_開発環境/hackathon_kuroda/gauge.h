@@ -26,7 +26,7 @@ public:
 	void Draw(void);
 	void SetAddGauge(float AddValue);//ƒQ[ƒW‚Ì‘Œ¸
 	void SetEndGauge();
-	float GetGaugeValue() { return m_fValue; }
+	float GetGaugeValue();
 private:
 	CPolygon *m_pFrame;//ƒQ[ƒW‚Ì˜g
 	CGaugeber *m_pGaugeBer;
