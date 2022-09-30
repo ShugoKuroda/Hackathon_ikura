@@ -47,6 +47,7 @@ public:
 
 	// プレイヤーのスコア設定
 	static void AddScore(int nScore) { m_nScorePlayer += nScore; }
+	static void ResetScore() { m_nScorePlayer = 0; }
 
 private:
 	static LPDIRECT3DTEXTURE9 m_apTexture[TYPE_MAX];	//テクスチャのポインタ

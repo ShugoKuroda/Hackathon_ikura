@@ -18,6 +18,7 @@
 #include "cloud.h"
 #include "fade_scene.h"
 #include "library.h"
+#include "rank.h"
 
 //-----------------------------------------------------------------------------------------------
 // using宣言
@@ -123,6 +124,9 @@ HRESULT CTitle::Init()
 
 	// タイトルBGM
 	CSound::Play(CSound::SOUND_LABEL_TITLE);
+
+	// 合計スコアのリセット
+	CRank::ResetScore();
 
 	return S_OK;
 }

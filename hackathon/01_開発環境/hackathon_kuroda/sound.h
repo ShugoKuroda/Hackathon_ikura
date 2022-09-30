@@ -30,6 +30,7 @@ public:
 		SOUND_LABEL_SE_SHOT,			// 弾発射
 		SOUND_LABEL_SE_LETGO,			// ボタンを離したときのSE
 		SOUND_LABEL_SE_CUPIN,			// カップイン
+		SOUND_LABEL_SE_CHARGE,			// チャージ
 
 		SOUND_LABEL_MAX,
 	} SOUND_LABEL;

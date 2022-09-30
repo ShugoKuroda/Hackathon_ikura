@@ -26,9 +26,10 @@ CSound::SOUNDPARAM CSound::m_aParam[CSound::SOUND_LABEL_MAX] =
 	{ "data/BGM/game000.wav", -1 },			// ゲームBGM
 	{ "data/BGM/result000.wav", -1 },		// リザルトBGM
 	{ "data/SE/button.wav", 0 },			// 自機登場
-	{ "data/SE/puttershot.wav", 0 },			// 弾発射
+	{ "data/SE/puttershot.wav", 0 },		// 弾発射
 	{ "data/SE/let_go000.wav", 0 },			// 自機登場
 	{ "data/SE/cup_in000.wav", 0 },			// 弾発射
+	{ "data/SE/charge000.wav", -1 },		// チャージ
 
 };
 
