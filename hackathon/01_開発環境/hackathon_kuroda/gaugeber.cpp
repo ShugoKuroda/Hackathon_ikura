@@ -55,7 +55,7 @@ HRESULT CGaugeber::Load()
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
 	// テクスチャの読み込み
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/Sky.png", &m_apTexture);		// 空
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/gaugeColor000.png", &m_apTexture);		// 空
 
 	return S_OK;
 }
