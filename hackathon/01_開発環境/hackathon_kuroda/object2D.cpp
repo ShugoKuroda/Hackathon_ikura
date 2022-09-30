@@ -159,6 +159,22 @@ void CObject2D::Draw()
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 }
 
+void CObject2D::SetGaugePos(const D3DXVECTOR3 & pos, const D3DXVECTOR3 & scale)
+{
+
+	VERTEX_2D *pVtx;
+
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+	//バッファの生成
+	pVtx[0].pos = D3DXVECTOR3(pos.x, pos.y - scale.y, 0.0f);
+	pVtx[1].pos = D3DXVECTOR3(pos.x + scale.x, pos.y - scale.y, 0.0f);
+	pVtx[2].pos = D3DXVECTOR3(pos.x, pos.y + scale.y, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(pos.x + scale.x, pos.y + scale.y, 0.0f);
+
+	m_pVtxBuff->Unlock();
+
+}
+
 //-----------------------------------------------------------------------------
 // サイズの設定
 //-----------------------------------------------------------------------------
