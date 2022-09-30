@@ -26,6 +26,9 @@
     <ClCompile Include="pause.cpp" />
     <ClCompile Include="fade_scene.cpp" />
     <ClCompile Include="fade.cpp" />
+    <ClCompile Include="gauge.cpp">
+      <Filter>ゲージ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input.h" />
@@ -53,5 +56,13 @@
     <ClInclude Include="pause.h" />
     <ClInclude Include="fade_scene.h" />
     <ClInclude Include="fade.h" />
+    <ClInclude Include="gauge.h">
+      <Filter>ゲージ</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ゲージ">
+      <UniqueIdentifier>{3fe3824d-acf6-4e5c-a7f2-1e4f8190ef53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -24,6 +24,7 @@
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="fade_scene.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="gauge.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="input_joypad.cpp" />
     <ClCompile Include="input_keyboard.cpp" />
@@ -51,6 +52,7 @@
     <ClInclude Include="fade.h" />
     <ClInclude Include="fade_scene.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="gauge.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="input_joypad.h" />
     <ClInclude Include="input_keyboard.h" />
