@@ -21,12 +21,12 @@ public:
 	enum LOGOTYPE
 	{//ロゴの種類
 		TYPE_NONE = 0,		// 何もなし
-		TYPE_WARNING,		// ボス接近ロゴ
-		TYPE_WARNING_SUB,	// ボス接近の説明ロゴ
-		TYPE_REMINDER,		// 注意喚起標識のロゴ
-		TYPE_CLEAR,			// ゲームクリアのロゴ
-		TYPE_BONUS,			// ボーナススコアのロゴ
-		TYPE_GAMEOVER,		// ゲームオーバーのロゴ
+		TYPE_ROUND1,		// ラウンド1
+		TYPE_ROUND2,		// ラウンド2
+		TYPE_FINALROUND,	// 最終ラウンド
+		TYPE_SCOREUI,		// 現在のスコアロゴ
+		TYPE_M,				// ｍ(メートル)のロゴ
+		TYPE_FINISH,		// 終了ロゴ
 		TYPE_MAX
 	};
 

@@ -33,15 +33,12 @@ LPDIRECT3DTEXTURE9 CTitle::m_apTexture[OBJ_MAX] = { nullptr };
 //-----------------------------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------------------------
-CTitle::CTitle() :m_nCountMoveBg(0), m_bTitleDraw(false), m_bPressFade(false), m_nCntLoop(0), m_bEntry{ false }, m_bPush(false), m_move(0.0f,0.0f,0.0f)
+CTitle::CTitle() :m_nCntLoop(0), m_bPush(false), m_move(0.0f, 0.0f, 0.0f), m_bDrawPress(false), m_bPressFade(false)
 {
-	for (int nCnt = 0; nCnt < OBJ_MAX - 1; nCnt++)
+	for (int nCnt = 0; nCnt < OBJ_MAX; nCnt++)
 	{
 		m_apObject2D[nCnt] = nullptr;
 	}
-
-	//雲の生成情報を初期化
-	ZeroMemory(&m_CloudInfo, sizeof(m_CloudInfo));
 }
 
 //-----------------------------------------------------------------------------------------------
@@ -60,12 +57,9 @@ HRESULT CTitle::Load()
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
 	// テクスチャの読み込み
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/title000.jpg", &m_apTexture[BG_SKY]);			// 背景の空
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/title000.png", &m_apTexture[BG_TITLE]);		// 背景の空
 	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/title001.png", &m_apTexture[LOGO_TITLE]);		// タイトルロゴ
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/title002.png", &m_apTexture[LOGO_PLAYER]);		// プレイヤーロゴ
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/title004.png", &m_apTexture[LOGO_PRESS]);		// PRESSロゴ
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/tutorial000.png", &m_apTexture[LOGO_TUTORIAL]);// チュートリアル
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/title003.png", &m_apTexture[LOGO_SHADOW]);		// プレイヤーロゴ(黒)
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/title002.png", &m_apTexture[LOGO_PUSH]);		// プレイヤーロゴ
 
 	return S_OK;
 }
@@ -97,51 +91,35 @@ HRESULT CTitle::Init()
 	// スクリーンサイズの保存
 	D3DXVECTOR2 ScreenSize = D3DXVECTOR2((float)CRenderer::SCREEN_WIDTH, (float)CRenderer::SCREEN_HEIGHT);
 
-	for (int nCnt = 0; nCnt < OBJ_MAX - 1; nCnt++)
+	for (int nCnt = 0; nCnt < OBJ_MAX; nCnt++)
 	{// 生成
 		m_apObject2D[nCnt] = new CObject2D;
 	}
 
-	// 空
-	m_apObject2D[BG_SKY]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, -ScreenSize.y / 2, 0.0f));
-	m_apObject2D[BG_SKY]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y * 3));
+	// 背景
+	m_apObject2D[BG_TITLE]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y / 2, 0.0f));
+	m_apObject2D[BG_TITLE]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
 	// タイトルロゴ
-	m_apObject2D[LOGO_TITLE]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y - 450.0f, 0.0f));
-	m_apObject2D[LOGO_TITLE]->SetSize(D3DXVECTOR2(ScreenSize.x - 550.0f, ScreenSize.y / 2.5f));
-	// プレイヤーロゴ
-	m_apObject2D[LOGO_PLAYER]->SetPosition(D3DXVECTOR3(-ScreenSize.x, 160.0f, 0.0f));
-	m_apObject2D[LOGO_PLAYER]->SetSize(D3DXVECTOR2(300.0f, 150.0f));
-	// Pressロゴ
-	m_apObject2D[LOGO_PRESS]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y - 150.0f, 0.0f));
-	m_apObject2D[LOGO_PRESS]->SetSize(D3DXVECTOR2(ScreenSize.x - 550.0f, 90.0f));
-	// フェード
-	m_apObject2D[BG_FADE]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y / 2, 0.0f));
-	m_apObject2D[BG_FADE]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
-	// チュートリアル
-	m_apObject2D[LOGO_TUTORIAL]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y / 2, 0.0f));
-	m_apObject2D[LOGO_TUTORIAL]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
+	m_apObject2D[LOGO_TITLE]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, -ScreenSize.y / 2, 0.0f));
+	m_apObject2D[LOGO_TITLE]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
+	// PRESS_SPACEロゴ
+	m_apObject2D[LOGO_PUSH]->SetPosition(D3DXVECTOR3(ScreenSize.x / 2, ScreenSize.y / 2, 0.0f));
+	m_apObject2D[LOGO_PUSH]->SetSize(D3DXVECTOR2(ScreenSize.x, ScreenSize.y));
 
-	for (int nCnt = 0; nCnt < OBJ_MAX - 1; nCnt++)
+	for (int nCnt = 0; nCnt < OBJ_MAX; nCnt++)
 	{// 初期化とテクスチャの設定
 		m_apObject2D[nCnt]->Init();
 		m_apObject2D[nCnt]->BindTexture(m_apTexture[nCnt]);
 	}
 
 	//背景とプレイヤーロゴ以外を前に描画する(タイプを設定する)
-	for (int nCnt = LOGO_TITLE; nCnt < OBJ_MAX - 1; nCnt++)
-	{
-		m_apObject2D[nCnt]->SetObjType(CObject::OBJ_TITLE);
-	}
+	m_apObject2D[BG_TITLE]->SetObjType(CObject::OBJ_TITLE);
 	//プレイヤーロゴを背景の次に描画する
-	m_apObject2D[LOGO_PLAYER]->SetObjType(CObject::OBJ_TITLE_LOGO);
-	m_apObject2D[BG_FADE]->SetObjType(CObject::OBJ_BLACK);
-	m_apObject2D[LOGO_TUTORIAL]->SetObjType(CObject::OBJ_LOGO);
+	m_apObject2D[LOGO_TITLE]->SetObjType(CObject::OBJ_TITLE_LOGO);
+	m_apObject2D[LOGO_PUSH]->SetObjType(CObject::OBJ_TITLE_LOGO);
 
 	//タイトルとPressロゴを透明にする
-	m_apObject2D[LOGO_TITLE]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
-	m_apObject2D[LOGO_PRESS]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
-	m_apObject2D[BG_FADE]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f));
-	m_apObject2D[LOGO_TUTORIAL]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+	m_apObject2D[LOGO_PUSH]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
 
 	// タイトルBGM
 	CSound::Play(CSound::SOUND_LABEL_TITLE);
@@ -178,17 +156,69 @@ void CTitle::Update()
 	// キーボード情報の取得
 	CInputKeyboard *pKeyboard = CManager::GetInputKeyboard();
 
-	if (pKeyboard->GetPress(CInputKeyboard::KEYINFO_ATTACK) == true)
+	// 位置の取得
+	D3DXVECTOR3 pos = m_apObject2D[LOGO_TITLE]->GetPosition();
+
+	// タイトルロゴが移動しきるまで移動
+	if (pos.y <= CRenderer::SCREEN_HEIGHT / 2)
+	{
+		pos.y += 5.0f;
+	}
+	else
+	{
+		m_bDrawPress = true;
+	}
+
+	if (pKeyboard->GetTrigger(CInputKeyboard::KEYINFO_ATTACK) == true)
 	{//攻撃キー押下
-		if (m_bPush == false)
+		if (m_bDrawPress == false)
+		{
+			pos.y = CRenderer::SCREEN_HEIGHT / 2;
+			m_bDrawPress = true;
+		}
+		else if (m_bPush == false && m_bDrawPress == true)
 		{
 			m_bPush = true;
 
 			// モードの設定
 			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_GAME);
+
+
 		}
 	}
 
+	if (m_bDrawPress == true)
+	{
+		// 色の取得
+		D3DXCOLOR col = m_apObject2D[LOGO_PUSH]->GetColor();
+
+		// PRESSロゴを点滅させる
+		if (m_bPressFade == false)
+		{
+			// a値を加算
+			col.a += 0.02f;
+			// a値の加算が終わったら
+			if (col.a >= 1.0f)
+			{// a値の減算を始める
+				m_bPressFade = true;
+			}
+		}
+		else if (m_bPressFade == true)
+		{
+			// a値を減算
+			col.a -= 0.02f;
+			// a値の減算が終わったら
+			if (col.a <= 0.0f)
+			{// a値の加算を始める
+				m_bPressFade = false;
+			}
+		}
+
+		// PRESSロゴの色を設定
+		m_apObject2D[LOGO_PUSH]->SetColor(col);
+	}
+
+	// 画面遷移中はリセットしない
 	if (m_bPush == false)
 	{
 		// タイトル画面をループさせるまでの時間
@@ -204,4 +234,7 @@ void CTitle::Update()
 			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_TITLE);
 		}
 	}
+
+	m_apObject2D[LOGO_TITLE]->SetPosition(pos);
+	m_apObject2D[LOGO_TITLE]->SetVertex();
 }

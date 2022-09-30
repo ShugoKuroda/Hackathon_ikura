@@ -201,7 +201,7 @@ void CRenderer::DrawFPS()
 	for (int nCntObj = 0; nCntObj < CObject::MAX_OBJECT; nCntObj++)
 	{
 		CObject *pObject = CObject::GetObject(nCntObj);
-		if (pObject != nullptr && nCntObj != 1)
+		if (pObject != nullptr)
 		{
 			if (nCntObj > 35)
 			{

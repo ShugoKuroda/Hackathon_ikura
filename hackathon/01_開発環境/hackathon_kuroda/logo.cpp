@@ -92,23 +92,23 @@ HRESULT CLogo::Load()
 
 	// テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
-		"data/TEXTURE/logo_000.png",
-		&m_pTexture[TYPE_WARNING]);
+		"data/TEXTURE/round1_000.png",
+		&m_pTexture[TYPE_ROUND1]);
 	D3DXCreateTextureFromFile(pDevice,
-		"data/TEXTURE/logo_001.png",
-		&m_pTexture[TYPE_WARNING_SUB]);
+		"data/TEXTURE/round2_000.png",
+		&m_pTexture[TYPE_ROUND2]);
 	D3DXCreateTextureFromFile(pDevice,
-		"data/TEXTURE/logo_002.png",
-		&m_pTexture[TYPE_REMINDER]);
+		"data/TEXTURE/finalRound000.png",
+		&m_pTexture[TYPE_FINALROUND]);
 	D3DXCreateTextureFromFile(pDevice,
-		"data/TEXTURE/logo_003.png",
-		&m_pTexture[TYPE_CLEAR]);
+		"data/TEXTURE/letshot000.png",
+		&m_pTexture[TYPE_SCOREUI]);
 	D3DXCreateTextureFromFile(pDevice,
-		"data/TEXTURE/logo_004.png",
-		&m_pTexture[TYPE_BONUS]);
+		"data/TEXTURE/letshot000.png",
+		&m_pTexture[TYPE_M]);
 	D3DXCreateTextureFromFile(pDevice,
-		"data/TEXTURE/logo_005.png",
-		&m_pTexture[TYPE_GAMEOVER]);
+		"data/TEXTURE/letshot000.png",
+		&m_pTexture[TYPE_FINISH]);
 
 	return S_OK;
 }
@@ -172,7 +172,7 @@ void CLogo::Update()
 	// 表示カウンターが0以下
 	if (m_nCountUninit <= 0)
 	{// 破棄
-		if (m_type == TYPE_CLEAR || m_type == TYPE_GAMEOVER)
+		if (m_type == TYPE_FINISH)
 		{
 			// モードの設定
 			CManager::GetFade()->SetFade(CFade::FADE_OUT, CManager::MODE::MODE_RESULT);
