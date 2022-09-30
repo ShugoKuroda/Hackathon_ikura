@@ -70,7 +70,7 @@ HRESULT CGame::Init()
 	LoadAll();
 
 	// プレイヤー生成
-	m_pPlayer = CPlayer::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH - 300.0f, CRenderer::SCREEN_HEIGHT / 2, 0.0f), 0);
+	m_pPlayer = CPlayer::Create(D3DXVECTOR3(300.0f, CRenderer::SCREEN_HEIGHT / 2, 0.0f), 0);
 
 	//ポインタの初期化
 	m_pMeshField = nullptr;

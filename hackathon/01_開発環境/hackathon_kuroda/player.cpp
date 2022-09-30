@@ -28,8 +28,8 @@
 #define LEVEL_UI_SIZE		(D3DXVECTOR2(50.0f, 50.0f))
 #define ATTACK_INTERVAL		(7)
 
-#define MAX_SWING_ROT		(-D3DX_PI/2)
-#define MAX_CHARGE_ROT		(D3DX_PI/2)
+#define MAX_SWING_ROT		(D3DX_PI/2)
+#define MAX_CHARGE_ROT		(-D3DX_PI/2)
 
 //-----------------------------------------------------------------------------
 // usingéŒ¾
@@ -165,9 +165,9 @@ void CPlayer::Update()
 		m_bSwing = true;
 
 	 	// ‰ñ“]—¦‚Ì‘‰Á
-		fRot += 0.01f;
+		fRot -= 0.01f;
 
-		if (fRot >= MAX_CHARGE_ROT)
+		if (fRot < MAX_CHARGE_ROT)
 		{
 			m_bControl = false;
 		}
@@ -188,10 +188,10 @@ void CPlayer::Update()
 	{
 		m_bControl = false;
 
-		if (fRot > MAX_SWING_ROT)
+		if (fRot <= MAX_SWING_ROT)
 		{
 			// ‰ñ“]—¦‚Ì‘‰Á
-			fRot -= 0.1f;
+			fRot += 0.15f;
 		}
 	}
 
