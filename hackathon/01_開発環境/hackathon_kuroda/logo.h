@@ -35,6 +35,7 @@ public:
 		ANIM_NONE = 0,		// ‰½‚à‚µ‚È‚¢
 		ANIM_LENGTHWISE,	// c‚ÉL‚ª‚é
 		ANIM_HORIZONTALLY,	// ‰¡‚ÉL‚ª‚é
+		ANIM_ZOOM_IN,		// ‚¾‚ñ‚¾‚ñ‘å‚«‚­‚È‚é
 		ANIM_FLASHING,		// “_–Å
 		ANIM_MAX
 	};

@@ -41,17 +41,13 @@ using namespace LibrarySpace;
 //-----------------------------------------------------------------------------------------------
 // 静的メンバ変数
 //-----------------------------------------------------------------------------------------------
-bool CGame::m_bCreateCloud = true; 
 CPlayer *CGame::m_pPlayer = {};
-CMeshField *CGame::m_pMeshField = nullptr;
 
 //-----------------------------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------------------------
-CGame::CGame() :m_nCntBubble(0), m_nRandBubble(0)
+CGame::CGame()
 {
-	//雲の生成情報を初期化
-	ZeroMemory(&m_CloudInfo, sizeof(m_CloudInfo));
 }
 
 //-----------------------------------------------------------------------------------------------
@@ -66,18 +62,21 @@ CGame::~CGame()
 //-----------------------------------------------------------------------------------------------
 HRESULT CGame::Init()
 {
+	// ボス接近中のロゴ
+	CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 300.0f, 0.0f), D3DXVECTOR2(CRenderer::SCREEN_WIDTH - 400.0f, 90.0f),
+		D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), 0.0f, CLogo::TYPE_WARNING, CLogo::ANIM_LENGTHWISE, 420);
+
 	// テクスチャ読み込み
 	LoadAll();
 
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(D3DXVECTOR3(300.0f, CRenderer::SCREEN_HEIGHT / 2, 0.0f), 0);
 
-	//ポインタの初期化
-	m_pMeshField = nullptr;
-	m_bCreateCloud = true;
-
-	// 決定音
+	// ゲームBGM
 	CSound::Play(CSound::SOUND_LABEL_GAME);
+
+	// Round数の加算
+	m_nRoundNum++;
 
 	return S_OK;
 }

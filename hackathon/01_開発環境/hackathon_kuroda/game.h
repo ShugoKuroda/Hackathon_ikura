@@ -36,19 +36,8 @@ public:		//メンバ関数
 	void Uninit() override;
 	void Update() override;
 
-	// 雲を生成
-	void CreateCloud();
-	// ロゴを生成
-	void CreateLogo(int nCounter);
-
-	// 雲の生成状態を設定
-	static void SetCreateCloud(bool bCreate) { m_bCreateCloud = bCreate; }
 	// プレイヤー情報の取得
 	static CPlayer *GetPlayer(int nNum) { return m_pPlayer; }
-	// スコア情報の取得
-	static CMeshField *GetMeshField() { return m_pMeshField; }
-	// 泡の生成状態を取得
-	static bool GetBubble() { return m_bCreateCloud; }
 	// プレイヤーのスコアをランキングに設定
 	static void SetPlayerScore();
 
@@ -61,17 +50,8 @@ private:
 private:	//メンバ変数
 	// プレイヤー情報
 	static CPlayer *m_pPlayer;
-	static CMeshField *m_pMeshField;
-
-	// 雲を生成するかどうか
-	static bool m_bCreateCloud;
-
-	// 雲の生成情報
-	CloudInfo m_CloudInfo;
-	// 雲が生成されるまでの時間(乱数)
-	int m_nRandBubble;
-	// 雲が生成されるまでの時間カウンター
-	int m_nCntBubble;
+	// ラウンド数
+	static int m_nRoundNum;
 };
 
 #endif	//_GAME_H_
