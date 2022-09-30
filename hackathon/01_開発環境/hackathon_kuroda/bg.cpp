@@ -30,6 +30,8 @@
 LPDIRECT3DTEXTURE9 CBg::m_apTexture[BG_MAX] = {};
 CObject2D *CBg::m_apObject2D[BG_MAX] = {};
 
+float CBg::m_fMoveQuantity = 0;
+
 //-----------------------------------------------------------------------------------------------
 //	コンストラクタ
 //-----------------------------------------------------------------------------------------------
@@ -102,6 +104,8 @@ HRESULT CBg::Init()
 {
 	//スクリーンサイズの保存
 	D3DXVECTOR2 ScreenSize = D3DXVECTOR2((float)CRenderer::SCREEN_WIDTH, (float)CRenderer::SCREEN_HEIGHT);
+	// 移動量リセット
+	m_fMoveQuantity = 0;
 
 	for (int nCnt = 0; nCnt < BG_MAX; nCnt++)
 	{// 生成
@@ -144,7 +148,25 @@ void CBg::Uninit()
 //-----------------------------------------------------------------------------------------------
 void CBg::Update()
 {
+	// 位置情報を取得
+	D3DXVECTOR3 pos = CObject2D::GetPosition();
 
+	// キーボード情報の取得
+	CInputKeyboard *pKeyboard = CManager::GetInputKeyboard();
+
+	//=============================================================================
+	// →が押された
+	//=============================================================================
+	if (pKeyboard->GetPress(CInputKeyboard::KEYINFO_RIGHT))
+	{
+		m_fMoveQuantity += 16;
+	}
+
+	//位置情報更新
+	m_apObject2D[BG_GROUND]->SetMove(D3DXVECTOR3 (-m_fMoveQuantity, 0.0f, 0.0f));
+
+	//頂点座標の設定
+	m_apObject2D[BG_GROUND]->SetVertex();
 }
 
 //-----------------------------------------------------------------------------------------------

@@ -85,6 +85,7 @@
     <ClCompile Include="gaugeber.cpp">
       <Filter>NewFilter1\ゲージ</Filter>
     </ClCompile>
+    <ClCompile Include="bg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gauge.h">
@@ -171,6 +172,7 @@
     <ClInclude Include="gaugeber.h">
       <Filter>NewFilter1\ゲージ</Filter>
     </ClInclude>
+    <ClInclude Include="bg.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NewFilter1">
