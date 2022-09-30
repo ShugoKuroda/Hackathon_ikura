@@ -102,12 +102,15 @@ HRESULT CLogo::Load()
 		&m_pTexture[TYPE_FINALROUND]);
 	D3DXCreateTextureFromFile(pDevice,
 		"data/TEXTURE/letshot000.png",
+		&m_pTexture[TYPE_START]);
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/kiroku000.png",
 		&m_pTexture[TYPE_SCOREUI]);
 	D3DXCreateTextureFromFile(pDevice,
-		"data/TEXTURE/letshot000.png",
+		"data/TEXTURE/m.png",
 		&m_pTexture[TYPE_M]);
 	D3DXCreateTextureFromFile(pDevice,
-		"data/TEXTURE/letshot000.png",
+		"data/TEXTURE/end000.png",
 		&m_pTexture[TYPE_FINISH]);
 
 	return S_OK;

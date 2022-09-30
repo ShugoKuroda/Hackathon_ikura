@@ -24,6 +24,7 @@ public:
 		TYPE_ROUND1,		// ラウンド1
 		TYPE_ROUND2,		// ラウンド2
 		TYPE_FINALROUND,	// 最終ラウンド
+		TYPE_START,			// ゲーム開始
 		TYPE_SCOREUI,		// 現在のスコアロゴ
 		TYPE_M,				// ｍ(メートル)のロゴ
 		TYPE_FINISH,		// 終了ロゴ
