@@ -155,14 +155,11 @@ void CScore::Set()
 	//各桁の数値を格納(pPostexU[桁ごとの数値])
 	int aPosTexU[MAX_SCORE];
 
-	aPosTexU[0] = (m_nScore % 100000000) / 10000000;
-	aPosTexU[1] = (m_nScore % 10000000) / 1000000;
-	aPosTexU[2] = (m_nScore % 1000000) / 100000;
-	aPosTexU[3] = (m_nScore % 100000) / 10000;
-	aPosTexU[4] = (m_nScore % 10000) / 1000;
-	aPosTexU[5] = (m_nScore % 1000) / 100;
-	aPosTexU[6] = (m_nScore % 100) / 10;
-	aPosTexU[7] = m_nScore % 10;
+	aPosTexU[0] = (m_nScore % 100000) / 10000;
+	aPosTexU[1] = (m_nScore % 10000) / 1000;
+	aPosTexU[2] = (m_nScore % 1000) / 100;
+	aPosTexU[3] = (m_nScore % 100) / 10;
+	aPosTexU[4] = m_nScore % 10;
 
 	//テクスチャを更新する
 	for (int nCntScore = 0; nCntScore < MAX_SCORE; nCntScore++)

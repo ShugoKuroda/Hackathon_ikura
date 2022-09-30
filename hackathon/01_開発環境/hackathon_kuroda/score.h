@@ -19,7 +19,7 @@ class CScore : public CObject
 {
 // ’è”’è‹`
 	static const int SCORE_SIZE = 30;
-	static const int MAX_SCORE = 8;
+	static const int MAX_SCORE = 5;
 
 // ƒƒ“ƒoŠÖ”
 public:
