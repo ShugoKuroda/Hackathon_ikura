@@ -35,6 +35,7 @@ public:
 		ANIM_NONE = 0,		// 何もしない
 		ANIM_LENGTHWISE,	// 縦に広がる
 		ANIM_HORIZONTALLY,	// 横に広がる
+		ANIM_ZOOM_IN,		// だんだん大きくなる
 		ANIM_FLASHING,		// 点滅
 		ANIM_MAX
 	};
@@ -45,7 +46,7 @@ public:
 	~CLogo() override;
 
 	// 生成
-	static CLogo* Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size, const D3DXCOLOR& col, const float& fRot, const LOGOTYPE& type, const ANIMTYPE& AnimType, const int& nCount);
+	static CLogo* Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size, const LOGOTYPE& type, const ANIMTYPE& AnimType, const int& nCount);
 	// テクスチャの読み込み
 	static HRESULT Load();
 	// テクスチャの削除
