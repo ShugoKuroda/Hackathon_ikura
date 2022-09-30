@@ -27,7 +27,7 @@ public:
 	static HRESULT Load(void);		//テクスチャの読み込み
 	static void Unload(void);		//テクスチャの削除
 	static CGaugeber *Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& scale,
-		 const int& nMaxValue);			//インスタンス生成処理
+			const int& nMaxValue);			//インスタンス生成処理
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;
