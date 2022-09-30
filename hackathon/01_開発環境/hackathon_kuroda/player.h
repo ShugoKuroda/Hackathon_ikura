@@ -64,6 +64,8 @@ public:
 	STATE GetState() { return m_state; }
 	// ƒXƒRƒAî•ñ‚Ìæ“¾
 	CScore *GetScore() { return m_pScore; }
+	bool GetSwing() { return m_bSwing; }
+	CGauge *GetGauge() { return m_pGauge; }
 
 	void State();
 

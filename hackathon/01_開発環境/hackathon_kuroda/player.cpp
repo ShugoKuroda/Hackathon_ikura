@@ -17,6 +17,8 @@
 #include "score.h"
 #include "rank.h"
 #include "gauge.h"
+#include "game.h"
+
 //-----------------------------------------------------------------------------
 // マクロ定義
 //-----------------------------------------------------------------------------
@@ -162,8 +164,6 @@ void CPlayer::Update()
 	 	// 回転率の増加
 		fRot -= 0.01f;
 
-
-
 		////攻撃カウンターの加算
 		//m_nCntAttack++;
 
@@ -207,7 +207,7 @@ void CPlayer::Update()
 	SetRot(fRot);
 
 	//位置情報更新
-	CObject2D::SetPosition(pos);
+	CObject2D::SetPosition(D3DXVECTOR3(GetPosition().x - CGame::GetBg()->GetMoveQuantity(), GetPosition().y, 0.0f));
 
 	//状態管理
 	State();

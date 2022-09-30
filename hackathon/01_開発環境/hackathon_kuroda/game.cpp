@@ -34,6 +34,7 @@ using namespace LibrarySpace;
 //-----------------------------------------------------------------------------------------------
 CPlayer *CGame::m_pPlayer = {};
 CBg *CGame::m_pBg = {};
+CBall *CGame::m_pBall = {};
 
 int CGame::m_nRoundNum = 0;
 
@@ -68,6 +69,9 @@ HRESULT CGame::Init()
 
 	// îwåiê∂ê¨
 	m_pBg = CBg::Create();
+
+	// îwåiê∂ê¨
+	m_pBall = CBall::Create(D3DXVECTOR3(300.0f, CRenderer::SCREEN_HEIGHT / 2, 0.0f), 0);
 
 	// ÉQÅ[ÉÄBGM
 	CSound::Play(CSound::SOUND_LABEL_GAME);
@@ -143,6 +147,8 @@ void CGame::LoadAll()
 	CPlayer::Load();
 	// îwåi
 	CBg::Load();
+	// tama
+	CBall::Load();
 	// îöî≠
 	CExplosion::Load();
 	// ÉXÉRÉA
@@ -162,6 +168,8 @@ void CGame::UnloadAll()
 	CPlayer::Unload();
 	// îwåi
 	CBg::Unload();
+	// tama
+	CBall::Unload();
 	// îöî≠
 	CExplosion::Unload();
 	// ÉXÉRÉA
