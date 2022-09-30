@@ -38,7 +38,7 @@ public:		//メンバ関数
 	void Update() override;
 
 	// プレイヤー情報の取得
-	static CPlayer *GetPlayer(int nNum) { return m_pPlayer; }
+	static CPlayer *GetPlayer() { return m_pPlayer; }
 
 	// プレイヤー情報の取得
 	static CBg *GetBg() { return m_pBg; }
