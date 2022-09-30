@@ -96,3 +96,12 @@ void CGauge::SetAddGauge(float AddValue)
 		m_pGaugeBer->SetGauge(AddValue);
 	}
 }
+
+float CGauge::GetGaugeValue()
+{
+	if (m_pGaugeBer)
+	{
+		return m_pGaugeBer->GetGaugeValue();
+	}
+	return 0.0f;
+}
