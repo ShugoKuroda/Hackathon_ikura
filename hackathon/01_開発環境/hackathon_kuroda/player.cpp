@@ -144,6 +144,7 @@ void CPlayer::Update()
 {
 	// 位置情報を取得
 	D3DXVECTOR3 pos = CObject2D::GetPosition();
+	CSound *pSound = CManager::GetSound();
 
 	// キーボード情報の取得
 	CInputKeyboard *pKeyboard = CManager::GetInputKeyboard();
@@ -192,6 +193,11 @@ void CPlayer::Update()
 	else if (m_bSwing == true)
 	{
 		m_bControl = false;
+		if (!m_bPlayLetSe)
+		{
+			pSound->Play(CSound::SOUND_LABEL_SE_LETGO);
+			m_bPlayLetSe = true;
+		}
 		if (m_pGauge)
 		{
 			if (m_pGauge->SetEndGauge())
