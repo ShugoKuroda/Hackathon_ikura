@@ -46,7 +46,7 @@ public:
 	~CLogo() override;
 
 	// 生成
-	static CLogo* Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size, const D3DXCOLOR& col, const float& fRot, const LOGOTYPE& type, const ANIMTYPE& AnimType, const int& nCount);
+	static CLogo* Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size, const float& fRot, const LOGOTYPE& type, const ANIMTYPE& AnimType, const int& nCount);
 	// テクスチャの読み込み
 	static HRESULT Load();
 	// テクスチャの削除

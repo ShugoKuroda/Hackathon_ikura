@@ -51,7 +51,7 @@ CLogo::~CLogo()
 // const ANIMTYPE& AnimType → アニメーションの種類
 // const int& nCount → 破棄するまでの時間
 //-----------------------------------------------------------------------------------------------
-CLogo* CLogo::Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size, const D3DXCOLOR& col, const float& fRot, const LOGOTYPE& type, const ANIMTYPE& AnimType, const int& nCount)
+CLogo* CLogo::Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size, const LOGOTYPE& type, const ANIMTYPE& AnimType, const int& nCount)
 {
 	// ポインタクラスを宣言
 	CLogo* pLogo = new CLogo;
@@ -61,9 +61,6 @@ CLogo* CLogo::Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size, const D3DX
 
 		// 位置設定
 		pLogo->SetPosition(pos);
-
-		// 角度設定
-		pLogo->SetRot(fRot);
 
 		// サイズの保存
 		pLogo->m_DefaultSize = size;
@@ -76,9 +73,6 @@ CLogo* CLogo::Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size, const D3DX
 
 		// 初期化
 		pLogo->Init();
-
-		// 色設定
-		pLogo->SetColor(col);
 
 		// 種類の設定
 		pLogo->m_type = type;

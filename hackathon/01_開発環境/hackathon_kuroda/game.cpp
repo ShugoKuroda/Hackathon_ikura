@@ -64,7 +64,7 @@ HRESULT CGame::Init()
 {
 	// ボス接近中のロゴ
 	CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 300.0f, 0.0f), D3DXVECTOR2(CRenderer::SCREEN_WIDTH - 400.0f, 90.0f),
-		D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), 0.0f, CLogo::TYPE_WARNING, CLogo::ANIM_LENGTHWISE, 420);
+		CLogo::TYPE_WARNING, CLogo::ANIM_LENGTHWISE, 420);
 
 	// テクスチャ読み込み
 	LoadAll();
@@ -123,37 +123,6 @@ void CGame::Update()
 	//	//雲の生成処理
 	//	CreateCloud();
 	//}
-}
-
-//-----------------------------------------------------------------------------------------------
-// ロゴの生成
-//-----------------------------------------------------------------------------------------------
-void CGame::CreateLogo(int nCounter)
-{
-	if (nCounter == 4800)
-	{
-		// ボス接近中のロゴ
-		CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 300.0f, 0.0f), D3DXVECTOR2(CRenderer::SCREEN_WIDTH - 400.0f, 90.0f),
-			D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), 0.0f, CLogo::TYPE_WARNING, CLogo::ANIM_LENGTHWISE, 420);
-
-		// ゲームBGMをストップ
-		CSound::Stop(CSound::SOUND_LABEL_GAME);
-		// 警告音
-		CSound::Play(CSound::SOUND_LABEL_SE_WARNING);
-	}
-
-	if (nCounter == 4920)
-	{
-		// ボス接近中の説明ロゴ
-		CLogo::Create(D3DXVECTOR3(CRenderer::SCREEN_WIDTH / 2, 500.0f, 0.0f), D3DXVECTOR2(CRenderer::SCREEN_WIDTH - 760.0f, 270.0f),
-			D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), 0.0f, CLogo::TYPE_WARNING_SUB, CLogo::ANIM_HORIZONTALLY, 300);
-	}
-
-	if (nCounter == 4800)
-	{
-		// ボス接近時の薄暗いフェード
-		CFadeScene::Create(CFadeScene::TYPE_BLACK);
-	}
 }
 
 //-----------------------------------------------------------------------------------------------
