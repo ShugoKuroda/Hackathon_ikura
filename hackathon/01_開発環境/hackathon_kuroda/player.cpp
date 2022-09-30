@@ -49,7 +49,7 @@ LPDIRECT3DTEXTURE9 CPlayer::m_apTexture = { nullptr };
 // コンストラクタ
 //-----------------------------------------------------------------------------
 CPlayer::CPlayer() :
-	m_move(0.0f, 0.0f, 0.0f), m_state(STATE_NORMAL), m_nCntState(0), m_nCntAttack(0), m_bControl(false), m_pScore(nullptr), m_bSwing(false)
+	m_move(0.0f, 0.0f, 0.0f), m_state(STATE_NORMAL), m_nCntState(0), m_nCntAttack(0), m_bControl(false), m_pScore(nullptr), m_bSwing(false), m_bPlayCharge(false)
 {
 	//オブジェクトの種類設定
 	SetObjType(EObject::OBJ_PLAYER);
@@ -156,6 +156,12 @@ void CPlayer::Update()
 	if (pKeyboard->GetPress(CInputKeyboard::KEYINFO_ATTACK) == true && m_bControl == true)
 	{//攻撃キー押下 && 操作可能状態なら
 
+		if (!m_bPlayCharge)
+		{
+			pSound->Play(CSound::SOUND_LABEL_SE_CHARGE);
+			m_bPlayCharge = true;
+		}
+
 		// 振りかぶっている状態にする
 		m_bSwing = true;
 
@@ -192,6 +198,8 @@ void CPlayer::Update()
 	}
 	else if (m_bSwing == true)
 	{
+		pSound->Stop(CSound::SOUND_LABEL_SE_CHARGE);
+
 		m_bControl = false;
 		if (!m_bPlayLetSe)
 		{

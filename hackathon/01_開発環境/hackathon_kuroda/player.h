@@ -92,6 +92,8 @@ private:	//ƒƒ“ƒo•Ï”
 	bool m_bSwing;
 	//‰¹‚ğˆê‰ñ‚¾‚¯–Â‚ç‚·
 	bool m_bPlayLetSe;
+	//‰¹‚ğˆê‰ñ‚¾‚¯–Â‚ç‚·
+	bool m_bPlayCharge;
 };
 
 #endif //_PLAYER_H_
